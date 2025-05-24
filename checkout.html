@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Finaliser la commande – MTlé Sazón</title>
+  <link rel="stylesheet" href="style.css" />
+  <script defer src="script.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <img src="assets/img/logo.png" alt="Logo MTlé Sazón" class="logo" />
+    <nav class="nav-desktop">
+      <a href="index.html">Accueil</a>
+      <a href="menu.html">Menu</a>
+    </nav>
+    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+    <nav class="nav-mobile" id="mobileMenu">
+      <a href="index.html">Accueil</a>
+      <a href="menu.html">Menu</a>
+    </nav>
+  </header>
+
+  <main class="checkout-section">
+    <h1>Finaliser la commande</h1>
+    <form id="form-checkout" onsubmit="return afficherConfirmation();">
+      <input type="text" placeholder="Nom complet" required />
+      <input type="tel" placeholder="Téléphone" required />
+      <input type="email" placeholder="Email (optionnel)" />
+      <input type="text" placeholder="Adresse (si livraison)" />
+      <button type="submit">Confirmer la commande</button>
+    </form>
+
+    <div id="confirmation" style="display: none; margin-top: 30px;">
+      <h2>Merci pour ta commande !</h2>
+      <p>Ton lien de suivi : <a href="suivi.html?commande=CMD12345">Suivre ma commande</a></p>
+    </div>
+  </main>
+</body>
+</html>

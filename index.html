@@ -1,0 +1,39 @@
+<!-- index.html (version mise à jour et fonctionnelle) -->
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Accueil – MTlé Sazón</title>
+  <link rel="stylesheet" href="style.css" />
+  <script defer src="script.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <a href="index.html" class="logo-link">
+      <img src="assets/img/logo.png" alt="MTlé Sazón Logo" class="logo" />
+    </a>
+    <nav class="nav-desktop">
+      <a href="index.html">Accueil</a>
+      <a href="menu.html">Menu</a>
+      <a href="https://www.instagram.com/toncompteinsta" target="_blank">Instagram</a>
+    </nav>
+    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+    <nav class="nav-mobile" id="mobileMenu">
+      <a href="index.html">Accueil</a>
+      <a href="menu.html">Menu</a>
+      <a href="https://www.instagram.com/toncompteinsta" target="_blank">Instagram</a>
+    </nav>
+  </header>
+
+  <main class="home-content">
+    <h1>Bienvenue chez <span class="highlight">MTlé Sazón</span></h1>
+    <h2 id="slogan"></h2>
+
+    <div class="cta-buttons">
+      <a href="menu.html?type=emporter"><button>Commander à emporter</button></a>
+      <a href="menu.html?type=livraison"><button>Commander en livraison</button></a>
+    </div>
+  </main>
+</body>
+</html>

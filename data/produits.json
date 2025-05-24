@@ -1,0 +1,94 @@
+[
+    {
+      "id": "EMP01",
+      "categorie": "Empanadas",
+      "nom": "Empanada Colombienne",
+      "prix": 3.50,
+      "image": "https://via.placeholder.com/180x180?text=Colombienne"
+    },
+    {
+      "id": "EMP02",
+      "categorie": "Empanadas",
+      "nom": "Empanada Équatorienne",
+      "prix": 3.50,
+      "image": "https://via.placeholder.com/180x180?text=Équatorienne"
+    },
+    {
+      "id": "EMP03",
+      "categorie": "Empanadas",
+      "nom": "Empanada Fromage",
+      "prix": 3.20,
+      "image": "https://via.placeholder.com/180x180?text=Fromage"
+    },
+    {
+      "id": "EMP04",
+      "categorie": "Empanadas",
+      "nom": "Empanada Poulet",
+      "prix": 3.80,
+      "image": "https://via.placeholder.com/180x180?text=Poulet"
+    },
+    {
+      "id": "EMP05",
+      "categorie": "Empanadas",
+      "nom": "Empanada Végétarienne",
+      "prix": 3.60,
+      "image": "https://via.placeholder.com/180x180?text=V%C3%A9g%C3%A9"
+    },
+    {
+      "id": "SAU01",
+      "categorie": "Suppléments",
+      "nom": "Sauce Piment Rouge",
+      "prix": 0.50,
+      "image": "https://via.placeholder.com/180x180?text=Piment+Rouge"
+    },
+    {
+      "id": "SAU02",
+      "categorie": "Suppléments",
+      "nom": "Sauce Ail Doux",
+      "prix": 0.50,
+      "image": "https://via.placeholder.com/180x180?text=Ail+Doux"
+    },
+    {
+      "id": "SAU03",
+      "categorie": "Suppléments",
+      "nom": "Sauce Verde",
+      "prix": 0.50,
+      "image": "https://via.placeholder.com/180x180?text=Verde"
+    },
+    {
+      "id": "BOI01",
+      "categorie": "Boissons",
+      "nom": "Coca-Cola",
+      "prix": 2.00,
+      "image": "https://via.placeholder.com/180x180?text=Coca-Cola"
+    },
+    {
+      "id": "BOI02",
+      "categorie": "Boissons",
+      "nom": "Jugo de Maracuyá",
+      "prix": 2.50,
+      "image": "https://via.placeholder.com/180x180?text=Maracuy%C3%A1"
+    },
+    {
+      "id": "BOI03",
+      "categorie": "Boissons",
+      "nom": "Agua sin gas",
+      "prix": 1.80,
+      "image": "https://via.placeholder.com/180x180?text=Eau+plate"
+    },
+    {
+      "id": "BOI04",
+      "categorie": "Boissons",
+      "nom": "Inca Kola",
+      "prix": 2.30,
+      "image": "https://via.placeholder.com/180x180?text=Inca+Kola"
+    },
+    {
+      "id": "BOI05",
+      "categorie": "Boissons",
+      "nom": "Horchata",
+      "prix": 2.20,
+      "image": "https://via.placeholder.com/180x180?text=Horchata"
+    }
+  ]
+  
