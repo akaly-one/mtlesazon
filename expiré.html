@@ -1,16 +1,41 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Commande terminée – MTlé Sazón</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css">
+  <script defer src="script.js"></script>
+  <script defer src="panier.js"></script>
 </head>
 <body>
-  <main class="expiré-section">
+  <header class="site-header">
+    <a href="index.html" class="logo-link">
+      <img src="assets/img/logo.png" alt="MTlé Sazón Logo" class="logo" />
+    </a>
+    <nav class="nav-desktop">
+      <a href="index.html">ACCUEIL</a>
+      <a href="menu.html">MENU</a>
+      <a href="https://www.instagram.com/toncompteinsta" target="_blank">INSTAGRAM</a>
+    </nav>
+    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+    <nav class="nav-mobile" id="mobileMenu">
+      <a href="index.html">ACCUEIL</a>
+      <a href="menu.html">MENU</a>
+      <a href="https://www.instagram.com/toncompteinsta" target="_blank">INSTAGRAM</a>
+    </nav>
+  </header>
+
+  <main class="expire-section" style="padding: 40px 20px; text-align: center;">
     <h1>Commande terminée</h1>
     <p>Ta commande a été livrée, retirée ou a expiré.</p>
-    <a href="index.html" class="cta-link">Retour à l’accueil</a>
+    <a href="index.html" class="cta-link" style="color:#d94f30;font-weight:bold;text-decoration:none;">Retour à l’accueil</a>
   </main>
+<script>
+  localStorage.removeItem("commandeID");
+  localStorage.removeItem("heureCommande");
+  // Optionnel : vider le panier si on considère la commande terminée
+  // localStorage.removeItem("panier");
+</script>
 </body>
 </html>

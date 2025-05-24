@@ -1,4 +1,3 @@
-<!-- index.html (version mise à jour et fonctionnelle) -->
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -7,6 +6,7 @@
   <title>Accueil – MTlé Sazón</title>
   <link rel="stylesheet" href="style.css" />
   <script defer src="script.js"></script>
+  <script defer src="panier.js"></script>
 </head>
 <body>
   <header class="site-header">
@@ -14,25 +14,27 @@
       <img src="assets/img/logo.png" alt="MTlé Sazón Logo" class="logo" />
     </a>
     <nav class="nav-desktop">
-      <a href="index.html">Accueil</a>
-      <a href="menu.html">Menu</a>
-      <a href="https://www.instagram.com/toncompteinsta" target="_blank">Instagram</a>
+      <a href="index.html">ACCUEIL</a>
+      <a href="menu.html">MENU</a>
+      <a href="https://www.instagram.com/toncompteinsta" target="_blank">INSTAGRAM</a>
     </nav>
+    <div class="cart-icon" onclick="window.location.href='checkout.html'">
+      🛒 <span id="cart-count">0</span>
+    </div>
     <div class="menu-toggle" onclick="toggleMenu()">☰</div>
     <nav class="nav-mobile" id="mobileMenu">
-      <a href="index.html">Accueil</a>
-      <a href="menu.html">Menu</a>
-      <a href="https://www.instagram.com/toncompteinsta" target="_blank">Instagram</a>
+      <a href="index.html">ACCUEIL</a>
+      <a href="menu.html">MENU</a>
+      <a href="https://www.instagram.com/toncompteinsta" target="_blank">INSTAGRAM</a>
+      <a href="checkout.html">PANIER 🛒 <span id="cart-count-mobile">0</span></a>
     </nav>
   </header>
 
-  <main class="home-content">
-    <h1>Bienvenue chez <span class="highlight">MTlé Sazón</span></h1>
-    <h2 id="slogan"></h2>
-
+  <main class="home-content" style="text-align:center; padding:60px 20px;">
+    <img src="assets/img/logo.png" alt="Logo MTlé Sazón" style="max-width:200px; margin-bottom:30px;" />
     <div class="cta-buttons">
-      <a href="menu.html?type=emporter"><button>Commander à emporter</button></a>
-      <a href="menu.html?type=livraison"><button>Commander en livraison</button></a>
+      <a href="menu.html"><button style="background-color:#d94f30; color:white;">COMMANDER MAINTENANT</button></a>
+      <a href="https://www.instagram.com/toncompteinsta" target="_blank"><button style="background-color:#444; color:white;">JE VEUX TE SUIVRE SUR INSTAGRAM</button></a>
     </div>
   </main>
 </body>

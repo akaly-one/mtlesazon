@@ -1,19 +1,36 @@
-/* === BASE === */
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+body {
+  background-image: url("img/fondbg.png");
+  background-size: 300px;
+  background-repeat: repeat;
+  background-attachment: fixed;
+  position: relative;
 }
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(2px);
+  z-index: 0;
+}
+
+body > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* style.css – Design responsive unifié pour MTlé Sazón */
 
 body {
+  margin: 0;
+  padding: 0;
   font-family: 'Segoe UI', sans-serif;
-  background-color: #fffaf5;
+  background-color: white;
   color: #333;
-  line-height: 1.6;
-  padding-bottom: 100px; /* pour les boutons fixes bas */
 }
 
-/* === HEADER & NAVIGATION === */
+/* HEADER */
 .site-header {
   display: flex;
   justify-content: space-between;
@@ -27,24 +44,22 @@ body {
 }
 
 .logo {
-  height: 60px;
+  height: 65px;
+  max-height: 90px;
   width: auto;
-}
-@media (min-width: 768px) {
-  .logo {
-    height: 80px;
-  }
 }
 
 .nav-desktop {
   display: none;
 }
+
 .nav-desktop a,
 .nav-mobile a {
   text-decoration: none;
   margin-left: 15px;
   color: #d94f30;
   font-weight: bold;
+  text-transform: uppercase;
 }
 
 .menu-toggle {
@@ -56,17 +71,17 @@ body {
 .nav-mobile {
   display: none;
   flex-direction: column;
-  background-color: white;
-  position: absolute;
-  top: 70px;
-  right: 20px;
-  border: 1px solid #ccc;
-  padding: 10px;
-  z-index: 999;
 }
 
 .nav-mobile.open {
   display: flex;
+  position: absolute;
+  top: 70px;
+  right: 20px;
+  background: white;
+  border: 1px solid #ccc;
+  padding: 10px;
+  z-index: 999;
 }
 
 @media (min-width: 768px) {
@@ -80,66 +95,150 @@ body {
   }
 }
 
-/* === TITRES & TEXTES === */
-.highlight {
-  color: #d94f30;
-  font-weight: bold;
-}
-
-h1, h2, h3 {
-  margin: 20px 0 10px;
-}
-
-/* === CTA BUTTONS === */
-.cta-buttons {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 30px;
-  gap: 15px;
-}
-
-.cta-buttons button {
-  padding: 15px 30px;
-  font-size: 18px;
-  background-color: #ff7043;
-  color: white;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-}
-
-.cta-buttons button:hover {
-  background-color: #e64a19;
-}
-
-/* === PRODUITS === */
-.product-section {
+/* PAGE MENU */
+.menu-section {
   padding: 20px;
 }
 
-.section-toggle {
-  background-color: #eee;
-  padding: 10px;
-  cursor: pointer;
-  font-weight: bold;
-  margin-top: 20px;
-  border-radius: 5px;
+.menu-section h1 {
+  text-align: center;
+  text-transform: uppercase;
+  margin-bottom: 30px;
 }
 
-.product-list {
+section h2 {
+  text-align: center;
+  text-transform: uppercase;
+  margin-top: 40px;
+  color: #d94f30;
+}
+
+.product-grid {
   display: flex;
   flex-direction: column;
-  gap: 15px;
-  margin-top: 10px;
+  gap: 20px;
+  padding: 10px 0;
 }
 
 .product-card {
   display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border: 1px solid #eee;
+  border-radius: 10px;
+  padding: 15px;
+  background-color: #fff;
+  box-shadow: 0 0 5px rgba(0,0,0,0.05);
+}
+
+.product-info {
+  display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid #ddd;
-  padding: 10px 0;
+}
+
+.product-info h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+}
+
+.product-info p {
+  margin: 4px 0;
+  color: #d94f30;
+  font-weight: bold;
+}
+
+.product-img {
+  height: 80px;
+  width: 80px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-left: 10px;
+}
+
+.qty-buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.qty-buttons button {
+  background-color: #d94f30;
+  color: white;
+  border: none;
+  padding: 5px 12px;
+  font-size: 18px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.qty-buttons span {
+  font-size: 16px;
+  margin: 0 10px;
+}
+
+.cart-footer {
+  margin-top: 40px;
+  text-align: center;
+}
+
+.cart-footer button {
+  background-color: #d94f30;
+  color: white;
+  font-size: 16px;
+  padding: 12px 30px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+/* Panier visible à droite */
+.cart-icon {
+  font-size: 22px;
+  font-weight: bold;
+  color: #d94f30;
+  cursor: pointer;
+  margin-left: auto;
+}
+
+/* Harmonisation des boutons secondaires (ex. bouton Instagram) */
+.cta-buttons a button:last-child {
+  background-color: #333;
+  color: white;
+}
+
+/* Liens cliquables visibles */
+a.cta-link {
+  color: #d94f30;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+/* Correction du padding global sur les formulaires (checkout) */
+form input, form button {
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+/* Style pour le récapitulatif dans checkout */
+#recap-panier {
+  background: #f8f8f8;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 30px;
+}
+# Image produit à gauche avec nom et prix à droite (style Uber Eats)
+.product-card {
+  flex-direction: row;
+  align-items: center;
+  gap: 15px;
 }
 
 .product-card img {
@@ -147,112 +246,10 @@ h1, h2, h3 {
   width: 70px;
   object-fit: cover;
   border-radius: 10px;
-  margin-left: 15px;
 }
 
-.product-card .info {
-  flex-grow: 1;
-  margin-left: 10px;
-}
-
-.product-card h3 {
-  margin-bottom: 5px;
-  font-size: 16px;
-}
-
-.product-card p {
-  font-size: 14px;
-  color: #666;
-}
-
-.product-card .price {
-  font-weight: bold;
-  color: #222;
-}
-
-.product-card .add-button {
-  background-color: #d94f30;
-  color: white;
-  border: none;
-  border-radius: 50%;
-  width: 32px;
-  height: 32px;
-  font-size: 20px;
-  cursor: pointer;
-}
-
-/* === PANIER / SUIVI / CONFIRMATION === */
-.summary-box,
-.tracking-box {
-  background-color: #fff;
-  border: 1px solid #ccc;
-  padding: 20px;
-  border-radius: 10px;
-  margin: 20px;
-}
-
-.summary-box h2,
-.tracking-box h2 {
-  margin-bottom: 15px;
-}
-
-.tracking-status {
-  font-weight: bold;
-  color: #007700;
-  margin-bottom: 10px;
-}
-
-.delivery-info {
-  color: #555;
-}
-
-/* === FORMULAIRE CHECKOUT === */
-form input,
-form button {
-  display: block;
-  margin: 10px auto;
-  padding: 12px;
-  width: 90%;
-  max-width: 400px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-
-form button {
-  background-color: #d94f30;
-  color: white;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-form button:hover {
-  background-color: #c63d20;
-}
-
-/* === LIEN DE SUIVI (EXPIRE OU PAS) === */
-.tracking-link-expired {
-  text-align: center;
-  margin-top: 50px;
-}
-
-.tracking-link-expired a {
-  color: #d94f30;
-  font-weight: bold;
-  text-decoration: none;
-  display: inline-block;
-  margin-top: 10px;
-}
-
-/* === MEDIA QUERIES === */
-@media (min-width: 1024px) {
-  .product-card {
-    padding: 20px 0;
-  }
-  .product-card img {
-    height: 90px;
-    width: 90px;
-  }
-  .product-card h3 {
-    font-size: 18px;
-  }
+.product-info {
+  flex-direction: column;
+  align-items: flex-start;
+  flex: 1;
 }

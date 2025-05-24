@@ -9,25 +9,29 @@
 </head>
 <body>
   <header class="site-header">
-    <img src="assets/img/logo.png" alt="Logo MTlé Sazón" class="logo" />
+    <a href="index.html" class="logo-link">
+      <img src="assets/img/logo.png" alt="MTlé Sazón Logo" class="logo" />
+    </a>
     <nav class="nav-desktop">
-      <a href="index.html">Accueil</a>
-      <a href="menu.html">Menu</a>
-      <a href="https://www.instagram.com/toncompteinsta" target="_blank">Instagram</a>
+      <a href="index.html">ACCUEIL</a>
+      <a href="menu.html">MENU</a>
+      <a href="https://www.instagram.com/toncompteinsta" target="_blank">INSTAGRAM</a>
     </nav>
+    <div class="cart-icon" onclick="window.location.href='checkout.html'">
+      🛒 <span id="cart-count">0</span>
+    </div>
     <div class="menu-toggle" onclick="toggleMenu()">☰</div>
     <nav class="nav-mobile" id="mobileMenu">
-      <a href="index.html">Accueil</a>
-      <a href="menu.html">Menu</a>
-      <a href="https://www.instagram.com/toncompteinsta" target="_blank">Instagram</a>
+      <a href="index.html">ACCUEIL</a>
+      <a href="menu.html">MENU</a>
+      <a href="https://www.instagram.com/toncompteinsta" target="_blank">INSTAGRAM</a>
+      <a href="checkout.html">PANIER 🛒 <span id="cart-count-mobile">0</span></a>
     </nav>
   </header>
 
   <main class="menu-section">
-    <h1>Notre menu</h1>
-
-    <!-- Les produits dynamiques seront injectés ici -->
-    <div id="product-list" class="product-grid"></div>
+    <h1>NOTRE MENU</h1>
+    <div id="product-list"></div>
 
     <div class="cart-footer">
       <button onclick="validerCommande()">Valider la commande</button>

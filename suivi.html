@@ -1,19 +1,61 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Suivi de commande – MTlé Sazón</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css">
   <script defer src="script.js"></script>
+  <script defer src="panier.js"></script>
 </head>
 <body>
-  <main class="suivi-section">
-    <h1>Commande CMD12345</h1>
-    <p>Heure de commande : 13:45</p>
-    <p>Status : <strong>En préparation</strong></p>
-    <p>Merci de patienter…</p>
-    <p>Ce lien expirera dans 2h.</p>
+  <header class="site-header">
+    <a href="index.html" class="logo-link">
+      <img src="assets/img/logo.png" alt="MTlé Sazón Logo" class="logo" />
+    </a>
+    <nav class="nav-desktop">
+      <a href="index.html">ACCUEIL</a>
+      <a href="menu.html">MENU</a>
+      <a href="https://www.instagram.com/toncompteinsta" target="_blank">INSTAGRAM</a>
+    </nav>
+    <div class="cart-icon" onclick="window.location.href='checkout.html'">
+      🛒 <span id="cart-count">0</span>
+    </div>
+    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+    <nav class="nav-mobile" id="mobileMenu">
+      <a href="index.html">ACCUEIL</a>
+      <a href="menu.html">MENU</a>
+      <a href="https://www.instagram.com/toncompteinsta" target="_blank">INSTAGRAM</a>
+      <a href="checkout.html">PANIER 🛒 <span id="cart-count-mobile">0</span></a>
+    </nav>
+  </header>
+
+  <main class="suivi-section" style="padding: 40px 20px; text-align: center;">
+    <h1>Suivi de ta commande</h1>
+    <div id="suivi-contenu"></div>
   </main>
+<script>
+  function getCommandeID() {
+    const url = new URL(window.location.href);
+    return url.searchParams.get("commande") || "Inconnue";
+  }
+
+  function afficherCommande() {
+    const id = getCommandeID();
+    const contenu = document.getElementById("suivi-contenu");
+    const heure = localStorage.getItem("heureCommande") || "inconnue";
+    const status = "En préparation"; // à automatiser plus tard
+
+    contenu.innerHTML = `
+      <p><strong>Commande :</strong> ${id}</p>
+      <p><strong>Statut :</strong> ${status}</p>
+      <p><strong>Lieu de retrait :</strong> MTlé Sazón, rue Latino 123</p>
+      <p><strong>Estimation :</strong> Prêt dans environ 15 min</p>
+      <p>Merci de patienter. Ce lien expirera automatiquement une fois la commande récupérée.</p>
+    `;
+  }
+
+  afficherCommande();
+</script>
 </body>
 </html>

@@ -3,37 +3,65 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Finaliser la commande – MTlé Sazón</title>
+  <title>Valider ma commande – MTlé Sazón</title>
   <link rel="stylesheet" href="style.css" />
+</head>
   <script defer src="script.js"></script>
+  <script defer src="panier.js"></script>
 </head>
 <body>
   <header class="site-header">
-    <img src="assets/img/logo.png" alt="Logo MTlé Sazón" class="logo" />
+    <a href="index.html" class="logo-link">
+      <img src="assets/img/logo.png" alt="MTlé Sazón Logo" class="logo" />
+    </a>
     <nav class="nav-desktop">
-      <a href="index.html">Accueil</a>
-      <a href="menu.html">Menu</a>
+      <a href="index.html">ACCUEIL</a>
+      <a href="menu.html">MENU</a>
+      <a href="https://www.instagram.com/toncompteinsta" target="_blank">INSTAGRAM</a>
     </nav>
+    <div class="cart-icon" onclick="window.location.href='checkout.html'">
+      🛒 <span id="cart-count">0</span>
+    </div>
     <div class="menu-toggle" onclick="toggleMenu()">☰</div>
     <nav class="nav-mobile" id="mobileMenu">
-      <a href="index.html">Accueil</a>
-      <a href="menu.html">Menu</a>
+      <a href="index.html">ACCUEIL</a>
+      <a href="menu.html">MENU</a>
+      <a href="https://www.instagram.com/toncompteinsta" target="_blank">INSTAGRAM</a>
+      <a href="checkout.html">PANIER 🛒 <span id="cart-count-mobile">0</span></a>
     </nav>
   </header>
 
-  <main class="checkout-section">
-    <h1>Finaliser la commande</h1>
-    <form id="form-checkout" onsubmit="return afficherConfirmation();">
-      <input type="text" placeholder="Nom complet" required />
-      <input type="tel" placeholder="Téléphone" required />
-      <input type="email" placeholder="Email (optionnel)" />
-      <input type="text" placeholder="Adresse (si livraison)" />
-      <button type="submit">Confirmer la commande</button>
+  <main class="checkout-section" style="padding: 40px 20px; background: white;">
+    <h1 style="text-align: center;">Valider ma commande</h1>
+    <div id="recap-panier" style="max-width: 500px; margin: auto; margin-bottom: 30px; background: #f9f9f9; padding: 15px; border-radius: 10px;">
+      <h2 style="text-align: center;">Récapitulatif</h2>
+      <ul id="liste-panier" style="list-style:none; padding: 0;">
+        <!-- Exemple d'un produit inséré dynamiquement -->
+        <!-- Ce bloc sera cloné via JS -->
+        <li class="ligne-panier" style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+          <img src="assets/img/emp-poulet.jpeg" alt="Empanada" style="width: 60px; height: 60px; object-fit: cover; border-radius: 8px;" />
+          <div>
+            <strong>Nom du produit</strong><br />
+            <small>Quantité : 2</small>
+          </div>
+        </li>
+        <!-- Fin exemple -->
+      </ul>
+      <p id="total-panier" style="text-align:center; font-weight: bold; margin-top: 10px;"></p>
+      <a href="menu.html" style="display:block; text-align:center; margin-top:10px; color:#d94f30;">Modifier ma commande</a>
+    </div>
+    <form id="form-checkout" onsubmit="return afficherConfirmation();" style="max-width: 500px; margin: auto;">
+      <input type="text" placeholder="Nom complet" required style="width:100%;margin-bottom:10px;padding:10px;" />
+      <input type="tel" placeholder="Téléphone" required style="width:100%;margin-bottom:10px;padding:10px;" />
+      <input type="email" placeholder="Email (optionnel)" style="width:100%;margin-bottom:10px;padding:10px;" />
+      <input type="text" placeholder="Adresse (si livraison)" style="width:100%;margin-bottom:20px;padding:10px;" />
+      <button type="submit" style="width:100%;background-color:#d94f30;color:white;padding:15px;border:none;border-radius:5px;">Confirmer la commande</button>
     </form>
 
-    <div id="confirmation" style="display: none; margin-top: 30px;">
+    <div id="confirmation" style="display: none; margin-top: 30px; text-align:center;">
       <h2>Merci pour ta commande !</h2>
-      <p>Ton lien de suivi : <a href="suivi.html?commande=CMD12345">Suivre ma commande</a></p>
+      <p>Tu peux suivre son statut ici :</p>
+      <p><a id="suivi-link" href="#" style="color:#d94f30;font-weight:bold;">Suivre ma commande</a></p>
     </div>
   </main>
 </body>

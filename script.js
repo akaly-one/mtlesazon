@@ -52,7 +52,9 @@ async function chargerProduits() {
           <h3>${prod.nom}</h3>
           <p>${prod.prix.toFixed(2)}€</p>
           <div class="qty-buttons">
-            <button>-</button><span>0</span><button>+</button>
+            <button onclick="retirerDuPanier('${prod.id}')">-</button>
+            <span id="qte-${prod.id}">0</span>
+            <button onclick="ajouterAuPanier('${prod.id}', '${prod.nom}', ${prod.prix})">+</button>
           </div>
         `;
         grille.appendChild(carte);
