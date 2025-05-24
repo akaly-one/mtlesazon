@@ -11,14 +11,6 @@ if (sloganEl) {
   sloganEl.textContent = slogans[r];
 }
 
-// === MENU BURGER MOBILE ===
-function toggleMenu() {
-  const menu = document.getElementById("mobileMenu");
-  if (menu) {
-    menu.classList.toggle("open");
-  }
-}
-
 // === CHARGEMENT DES PRODUITS (menu.html) ===
 async function chargerProduits() {
   const container = document.getElementById("product-list");

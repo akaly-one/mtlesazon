@@ -8,25 +8,18 @@
   <script defer src="script.js"></script>
 </head>
 <body>
-  <header class="site-header">
-    <a href="index.html" class="logo-link">
-      <img src="assets/img/logo.png" alt="MTlé Sazón Logo" class="logo" />
+  <header class="site-header" style="background-color: #fff7ef; display: flex; align-items: center; justify-content: space-between; padding: 10px 20px;">
+    <a href="https://www.instagram.com/toncompteinsta" target="_blank">
+      <img src="assets/img/insta-icon-black.png" alt="Instagram" style="height: 24px;" />
     </a>
-    <nav class="nav-desktop">
-      <a href="index.html">ACCUEIL</a>
-      <a href="menu.html">MENU</a>
-      <a href="https://www.instagram.com/toncompteinsta" target="_blank">INSTAGRAM</a>
-    </nav>
-    <div class="cart-icon" onclick="window.location.href='checkout.html'">
+
+    <a href="index.html" class="logo-link" style="flex-grow: 1; text-align: center;">
+      <img src="assets/img/logo.png" alt="MTlé Sazón Logo" class="logo" style="height: 50px;" />
+    </a>
+
+    <div class="cart-icon" onclick="window.location.href='checkout.html'" style="cursor: pointer;">
       🛒 <span id="cart-count">0</span>
     </div>
-    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
-    <nav class="nav-mobile" id="mobileMenu">
-      <a href="index.html">ACCUEIL</a>
-      <a href="menu.html">MENU</a>
-      <a href="https://www.instagram.com/toncompteinsta" target="_blank">INSTAGRAM</a>
-      <a href="checkout.html">PANIER 🛒 <span id="cart-count-mobile">0</span></a>
-    </nav>
   </header>
 
   <main class="menu-section">

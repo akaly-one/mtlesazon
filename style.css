@@ -36,7 +36,7 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 10px 20px;
-  background-color: white;
+  background-color: #fff7ef; /* harmonisation avec fond du logo */
   border-bottom: 1px solid #ddd;
   position: sticky;
   top: 0;
@@ -47,48 +47,11 @@ body {
   height: 65px;
   max-height: 90px;
   width: auto;
-}
-
-.nav-desktop {
-  display: none;
-}
-
-.nav-desktop a,
-.nav-mobile a {
-  text-decoration: none;
-  margin-left: 15px;
-  color: #d94f30;
-  font-weight: bold;
-  text-transform: uppercase;
-}
-
-.menu-toggle {
-  font-size: 28px;
-  cursor: pointer;
-  display: block;
-}
-
-.nav-mobile {
-  display: none;
-  flex-direction: column;
-}
-
-.nav-mobile.open {
-  display: flex;
-  position: absolute;
-  top: 70px;
-  right: 20px;
-  background: white;
-  border: 1px solid #ccc;
-  padding: 10px;
-  z-index: 999;
+  flex-grow: 1;
+  text-align: center;
 }
 
 @media (min-width: 768px) {
-  .nav-desktop {
-    display: flex;
-    gap: 20px;
-  }
   .menu-toggle,
   .nav-mobile {
     display: none;
@@ -252,4 +215,20 @@ form input, form button {
   flex-direction: column;
   align-items: flex-start;
   flex: 1;
+}
+.promo-banner {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16/9;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.promo-banner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
