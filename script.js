@@ -40,7 +40,7 @@ async function chargerProduits() {
         carte.className = "product-card";
 
         carte.innerHTML = `
-          <img src="assets/img/${prod.image}" alt="${prod.nom}">
+          <img src="${prod.image}" alt="${prod.nom}" class="product-image">
           <h3>${prod.nom}</h3>
           <p>${prod.prix.toFixed(2)}€</p>
           <div class="qty-buttons">
@@ -72,4 +72,54 @@ function afficherConfirmation() {
     confirmation.style.display = "block";
   }
   return false;
+}
+
+// === AJOUT DANS LE PANIER ===
+function ajouterAuPanier(id, nom, prix) {
+  let qteEl = document.getElementById("qte-" + id);
+  let qte = parseInt(qteEl.textContent);
+  qte++;
+  qteEl.textContent = qte;
+
+  // Mettre à jour le panier dans localStorage
+  let panier = JSON.parse(localStorage.getItem("panier")) || [];
+  const index = panier.findIndex(p => p.id === id);
+  if (index !== -1) {
+    panier[index].quantite += 1;
+  } else {
+    panier.push({ id, nom, prix, quantite: 1 });
+  }
+  localStorage.setItem("panier", JSON.stringify(panier));
+
+  // Mettre à jour le compteur
+  majCompteurPanier();
+}
+
+// === RETRAIT DU PANIER ===
+function retirerDuPanier(id) {
+  let qteEl = document.getElementById("qte-" + id);
+  let qte = parseInt(qteEl.textContent);
+  if (qte > 0) qte--;
+
+  qteEl.textContent = qte;
+
+  let panier = JSON.parse(localStorage.getItem("panier")) || [];
+  const index = panier.findIndex(p => p.id === id);
+  if (index !== -1) {
+    panier[index].quantite -= 1;
+    if (panier[index].quantite <= 0) {
+      panier.splice(index, 1);
+    }
+    localStorage.setItem("panier", JSON.stringify(panier));
+  }
+
+  majCompteurPanier();
+}
+
+// === MISE À JOUR DU COMPTEUR PANIER ===
+function majCompteurPanier() {
+  const panier = JSON.parse(localStorage.getItem("panier")) || [];
+  const total = panier.reduce((acc, p) => acc + p.quantite, 0);
+  const countEls = document.querySelectorAll("#cart-count, #cart-count-mobile");
+  countEls.forEach(el => el.textContent = total);
 }

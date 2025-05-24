@@ -7,6 +7,13 @@
   <link rel="stylesheet" href="style.css">
   <script defer src="script.js"></script>
   <script defer src="panier.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+  <script>
+    const supabase = supabase.createClient(
+      'https://pegawlulgltcxmvfirfq.supabase.co',
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBlZ2F3bHVsZ2x0Y3htdmZpcmZxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDgxMjE3ODgsImV4cCI6MjA2MzY5Nzc4OH0.qAh5nrKXV-D4EHPZNQLJoWZ81X8HDbiMmJ5Tx3dTklA'
+    );
+  </script>
 </head>
 <body>
   <header class="site-header">
@@ -35,24 +42,65 @@
     <div id="suivi-contenu"></div>
   </main>
 <script>
-  function getCommandeID() {
+  async function afficherCommande() {
     const url = new URL(window.location.href);
-    return url.searchParams.get("commande") || "Inconnue";
-  }
-
-  function afficherCommande() {
-    const id = getCommandeID();
+    const commandeID = url.searchParams.get("id");
     const contenu = document.getElementById("suivi-contenu");
-    const heure = localStorage.getItem("heureCommande") || "inconnue";
-    const status = "En préparation"; // à automatiser plus tard
+
+    if (!commandeID) {
+      contenu.innerHTML = "<p>Commande introuvable. Vérifie ton lien.</p>";
+      return;
+    }
+
+    const { data: commande, error } = await supabase
+      .from("commandes")
+      .select("*")
+      .eq("id", commandeID)
+      .single();
+
+    if (error || !commande) {
+      contenu.innerHTML = "<p>Commande introuvable ou supprimée.</p>";
+      return;
+    }
+
+    const statutLabel = {
+      "envoyé": "🟡 Envoyée",
+      "accepté": "🟠 Acceptée",
+      "prêt": "✅ Prête",
+      "terminée": "🔴 Terminée"
+    };
+
+    const dateCmd = new Date(commande.heure_commande);
+    const now = new Date();
+    const delaiMs = 15 * 60 * 1000 - (now - dateCmd);
+    const tempsRestant = Math.max(0, delaiMs);
+    const minutes = Math.floor(tempsRestant / 60000);
+    const seconds = Math.floor((tempsRestant % 60000) / 1000);
+
+    const produits = commande.produits.map(p => `• ${p.nom} x${p.quantite}`).join("<br>");
+
+    const baseURL = window.location.origin + window.location.pathname;
+    const suiviURL = `${baseURL}?id=${commandeID}`;
+
+    const estExpiree = commande.statut === "terminée" || tempsRestant <= 0;
 
     contenu.innerHTML = `
-      <p><strong>Commande :</strong> ${id}</p>
-      <p><strong>Statut :</strong> ${status}</p>
-      <p><strong>Lieu de retrait :</strong> MTlé Sazón, rue Latino 123</p>
-      <p><strong>Estimation :</strong> Prêt dans environ 15 min</p>
-      <p>Merci de patienter. Ce lien expirera automatiquement une fois la commande récupérée.</p>
+      <p><strong>Commande :</strong> ${commandeID}</p>
+      <p><strong>Statut :</strong> ${statutLabel[commande.statut]}</p>
+      <p><strong>Produits :</strong><br>${produits}</p>
+      <p><strong>Lieu :</strong> ${commande.message ? commande.message : "À retirer sur place"}</p>
+      <p><strong>Estimation :</strong> ${estExpiree ? "Commande expirée ou livrée." : `${minutes} min ${seconds}s restantes`}</p>
+      <p style="margin-top: 30px;">Tu peux partager ce lien de suivi :</p>
+      <ul style="list-style: none; padding: 0;">
+        <li><a href="https://wa.me/?text=Voici ton lien de suivi MTlé Sazón : ${encodeURIComponent(suiviURL)}" target="_blank" style="color: #25D366; font-weight: bold;">📱 WhatsApp</a></li>
+        <li><a href="mailto:?subject=Suivi de commande MTlé Sazón&body=Voici ton lien de suivi : ${encodeURIComponent(suiviURL)}" style="color: #0072c6; font-weight: bold;">✉️ E-mail</a></li>
+        <li><a href="${suiviURL}" style="color: #555; font-weight: bold;">🔗 Lien direct</a></li>
+      </ul>
     `;
+
+    if (!estExpiree) {
+      setTimeout(afficherCommande, 1000); // auto-refresh
+    }
   }
 
   afficherCommande();

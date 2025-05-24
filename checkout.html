@@ -5,6 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Valider ma commande – MTlé Sazón</title>
   <link rel="stylesheet" href="style.css" />
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+<script>
+  const supabase = supabase.createClient(
+    'https://YOUR_PROJECT.supabase.co',
+    'YOUR_ANON_KEY'
+  );
+</script>
 </head>
   <script defer src="script.js"></script>
   <script defer src="panier.js"></script>
@@ -50,7 +57,7 @@
       <p id="total-panier" style="text-align:center; font-weight: bold; margin-top: 10px;"></p>
       <a href="menu.html" style="display:block; text-align:center; margin-top:10px; color:#d94f30;">Modifier ma commande</a>
     </div>
-    <form id="form-checkout" onsubmit="return afficherConfirmation();" style="max-width: 500px; margin: auto;">
+    <form id="form-checkout" onsubmit="return afficherConfirmation(event);" style="max-width: 500px; margin: auto;">
       <input type="text" placeholder="Nom complet" required style="width:100%;margin-bottom:10px;padding:10px;" />
       <input type="tel" placeholder="Téléphone" required style="width:100%;margin-bottom:10px;padding:10px;" />
       <input type="email" placeholder="Email (optionnel)" style="width:100%;margin-bottom:10px;padding:10px;" />
@@ -62,7 +69,134 @@
       <h2>Merci pour ta commande !</h2>
       <p>Tu peux suivre son statut ici :</p>
       <p><a id="suivi-link" href="#" style="color:#d94f30;font-weight:bold;">Suivre ma commande</a></p>
+      <p>Tu peux aussi recevoir le lien via :</p>
+      <ul style="list-style: none; padding: 0;">
+        <li><a id="suivi-whatsapp" target="_blank" style="color: #25D366; font-weight: bold;">📱 WhatsApp</a></li>
+        <li><a id="suivi-mail" style="color: #0072c6; font-weight: bold;">✉️ E-mail</a></li>
+      </ul>
     </div>
   </main>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const listePanier = document.getElementById("liste-panier");
+    const totalPanier = document.getElementById("total-panier");
+
+    const panier = JSON.parse(localStorage.getItem("panier")) || [];
+    let total = 0;
+
+    if (panier.length === 0) {
+      listePanier.innerHTML = "<p style='text-align:center;'>Ton panier est vide.</p>";
+      totalPanier.textContent = "";
+      return;
+    }
+
+    // Vider la liste initiale (exemple statique)
+    listePanier.innerHTML = "";
+
+    panier.forEach(produit => {
+      const item = document.createElement("li");
+      item.className = "ligne-panier";
+      item.style.display = "flex";
+      item.style.alignItems = "center";
+      item.style.gap = "10px";
+      item.style.marginBottom = "10px";
+
+      const image = document.createElement("img");
+      image.src = "assets/img/emp-poulet.jpeg"; // Optionnel : adapter selon l'ID produit
+      image.alt = "Produit";
+      image.style.width = "60px";
+      image.style.height = "60px";
+      image.style.objectFit = "cover";
+      image.style.borderRadius = "8px";
+
+      const desc = document.createElement("div");
+      desc.innerHTML = `<strong>${produit.nom}</strong><br /><small>Quantité : ${produit.quantite}</small>`;
+
+      item.appendChild(image);
+      item.appendChild(desc);
+      listePanier.appendChild(item);
+
+      total += produit.prix * produit.quantite;
+    });
+
+    totalPanier.textContent = `Total : ${total.toFixed(2)} €`;
+  });
+
+  async function afficherConfirmation(event) {
+    event.preventDefault();
+
+    const bouton = event.target.querySelector("button[type='submit']");
+    bouton.disabled = true;
+    bouton.textContent = "Enregistrement...";
+
+    const panier = JSON.parse(localStorage.getItem("panier")) || [];
+    if (panier.length === 0) {
+      alert("Le panier est vide.");
+      bouton.disabled = false;
+      bouton.textContent = "Confirmer la commande";
+      return false;
+    }
+
+    const nom = document.querySelector("input[placeholder='Nom complet']").value.trim();
+    const tel = document.querySelector("input[placeholder='Téléphone']").value.trim();
+    const email = document.querySelector("input[placeholder='Email (optionnel)']").value.trim();
+    const adresse = document.querySelector("input[placeholder='Adresse (si livraison)']").value.trim();
+
+    // 1. Ajouter ou mettre à jour le client
+    await supabase
+      .from("clients")
+      .upsert([{ nom, tel, email }], { onConflict: "tel" });
+
+    // 2. Créer la commande
+    const { data: commande, error } = await supabase
+      .from("commandes")
+      .insert([{
+        client_tel: tel,
+        produits: panier,
+        message: adresse,
+        statut: "envoyé"
+      }])
+      .select()
+      .single();
+
+    if (error) {
+      alert("Erreur lors de l'enregistrement de la commande.");
+      console.error(error);
+      bouton.disabled = false;
+      bouton.textContent = "Confirmer la commande";
+      return false;
+    }
+
+    // 3. Générer le lien de suivi
+    const orderId = commande.id;
+    document.getElementById("form-checkout").style.display = "none";
+    const confirmationDiv = document.getElementById("confirmation");
+    confirmationDiv.style.display = "block";
+
+    const baseURL = window.location.origin + "/suivi.html?id=" + orderId;
+
+    document.getElementById("suivi-link").href = baseURL;
+
+    const numeroWhatsApp = "32475123456";
+    document.getElementById("suivi-whatsapp").href =
+      `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent("Salut, je viens de commander sur MTlé Sazón. Voici mon lien de suivi : " + baseURL)}`;
+
+    document.getElementById("suivi-mail").href =
+      `mailto:?subject=Suivi de commande MTlé Sazón&body=Voici ton lien de suivi : ${encodeURIComponent(baseURL)}`;
+
+    // Ajouter un bouton de retour
+    const retourBtn = document.createElement("a");
+    retourBtn.href = "menu.html";
+    retourBtn.textContent = "← Revenir au menu";
+    retourBtn.style.display = "block";
+    retourBtn.style.marginTop = "20px";
+    retourBtn.style.color = "#d94f30";
+    retourBtn.style.fontWeight = "bold";
+
+    confirmationDiv.appendChild(retourBtn);
+
+    return false;
+  }
+</script>
 </body>
 </html>

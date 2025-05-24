@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tableau de Bord – MTlé Sazón</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #1c1c1e;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen;
+      color: #ffffff;
+    }
+
+    h1 {
+      font-size: 1.8em;
+      padding: 20px;
+      background-color: #2c2c2e;
+      margin: 0;
+      border-bottom: 1px solid #444;
+      box-shadow: 0 1px 5px rgba(0,0,0,0.5);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      text-align: center;
+      color: #ffffff;
+    }
+
+    .statut-envoye { color: #f5a623; font-weight: bold; }
+    .statut-accepte { color: #ff6600; font-weight: bold; }
+    .statut-pret { color: #2ecc71; font-weight: bold; }
+    /* Nouveau style pour boutons de statut */
+    .statut-btn {
+      padding: 7px 14px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 0.95em;
+      transition: all 0.3s ease;
+      user-select: none;
+      background-color: #3a3a3c;
+      color: #fff;
+      border: 1px solid #555;
+    }
+    .statut-btn.active {
+      background-color: #0a84ff;
+      font-weight: bolder;
+      box-shadow: 0 0 5px rgba(10,132,255,0.7);
+    }
+    .statut-btn[data-statut="envoyé"] { background-color: #3a3a3c; color: #fff; }
+    .statut-btn[data-statut="accepté"] { background-color: #3a3a3c; color: #fff; }
+    .statut-btn[data-statut="prêt"] { background-color: #3a3a3c; color: #fff; }
+    .statut-btn[data-statut="terminée"] { background-color: #3a3a3c; color: #888; }
+    .statut-btn:hover {
+      opacity: 0.9;
+      transform: scale(1.02);
+    }
+
+    /* Style du bloc commande */
+    .commande-bloc {
+      background: #2c2c2e;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.8);
+      border: 1px solid #444;
+      margin: 20px auto;
+      padding: 20px;
+      border-radius: 14px;
+      transition: all 0.3s ease;
+      max-width: 800px;
+      box-sizing: border-box;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      color: #fff;
+    }
+
+    .commande-bloc:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(10,132,255,0.6);
+    }
+
+    .commande-header {
+      font-size: 1.2em;
+      font-weight: 600;
+      border-bottom: 1px solid #444;
+      padding-bottom: 8px;
+      margin-bottom: 12px;
+      color: #ddd;
+      user-select: none;
+    }
+
+    .commande-info fieldset {
+      border: none;
+      padding: 0;
+      margin-bottom: 12px;
+    }
+
+    .commande-info legend {
+      font-weight: 600;
+      margin-bottom: 6px;
+      color: #bbb;
+      user-select: none;
+    }
+
+    .commande-info p {
+      margin: 4px 0;
+      line-height: 1.3;
+      color: #eee;
+    }
+
+    textarea,
+    input,
+    button {
+      border-radius: 8px;
+      border: 1px solid #555;
+      padding: 10px;
+      font-family: inherit;
+      font-size: 0.95em;
+      resize: vertical;
+      width: 100%;
+      box-sizing: border-box;
+      color: #fff;
+      background-color: #333;
+      transition: border-color 0.3s ease;
+    }
+    textarea:focus,
+    input:focus {
+      border-color: #0a84ff;
+      outline: none;
+      background-color: #444;
+    }
+
+    button.enregistrer-btn {
+      margin-top: 10px;
+      padding: 7px 14px;
+      border: none;
+      border-radius: 10px;
+      background-color: #0a84ff;
+      color: white;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 0.95em;
+      transition: all 0.3s ease;
+      align-self: flex-start;
+      user-select: none;
+      border: 1px solid #0060df;
+    }
+    button.enregistrer-btn:hover {
+      opacity: 0.9;
+      transform: scale(1.02);
+      background-color: #0060df;
+      border-color: #004bb5;
+    }
+
+    /* Widget box style */
+    .widget-box {
+      border: 1px solid #444;
+      background-color: #2c2c2e;
+      border-radius: 12px;
+      padding: 10px;
+      color: #ddd;
+    }
+
+    @media (max-width: 768px) {
+      #side-menu {
+        position: static;
+        width: 100%;
+        height: auto;
+        padding: 10px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        justify-content: space-around;
+        background-color: #1c1c1e;
+        box-shadow: none;
+        margin-bottom: 20px;
+      }
+
+      #commande-container {
+        margin-left: 0;
+        padding: 10px;
+      }
+
+      .commande-bloc {
+        margin: 10px 0;
+        padding: 14px;
+        border-radius: 10px;
+      }
+
+      .widget-box {
+        padding: 8px;
+      }
+
+      .commande-info fieldset {
+        margin-bottom: 10px;
+      }
+
+      #commandes-widget, #client-liste {
+        position: static !important;
+        width: 100% !important;
+        max-height: unset !important;
+        margin: 10px 0;
+        border-radius: 10px;
+      }
+
+      h1 {
+        font-size: 1.5em;
+        padding: 12px;
+      }
+
+      button.statut-btn,
+      button.enregistrer-btn {
+        font-size: 0.9em;
+        padding: 6px 10px;
+      }
+
+      .commande-header {
+        font-size: 1em;
+      }
+    }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+  <script>
+    const supabase = supabase.createClient(
+      'https://YOUR-PROJECT.supabase.co',  // 🔁 à remplacer
+      'YOUR-ANON-KEY'                       // 🔁 à remplacer
+    );
+  </script>
+  <script>
+    // Protection simple côté client
+    document.addEventListener("DOMContentLoaded", () => {
+      if (!document.referrer.includes("admin-login.html")) {
+        alert("Accès interdit. Redirection en cours.");
+        window.location.href = "admin-login.html";
+      }
+    });
+  </script>
+</head>
+<body>
+  <h1>📋 Tableau de Bord des Commandes</h1>
+  <div id="side-menu" style="position: fixed; top: 80px; left: 0; width: 220px; background-color: #2c2c2e; height: 100%; padding: 16px; box-shadow: 2px 0 10px rgba(0,0,0,0.5); z-index: 99; color: white;">
+    <h2 style="font-size: 1.2em; margin-bottom: 10px;">📁 Modules</h2>
+    <label><input type="checkbox" checked onchange="toggleSection('widget-client')"> 👤 Client</label><br/>
+    <label><input type="checkbox" checked onchange="toggleSection('widget-commande')"> 🛒 Commande</label><br/>
+    <label><input type="checkbox" checked onchange="toggleSection('widget-statut')"> 📦 Statut</label><br/>
+    <label><input type="checkbox" checked onchange="toggleSection('widget-message')"> 📝 Message</label><br/>
+    <label><input type="checkbox" onchange="toggleSection('widget-historique')"> 📜 Historique</label>
+  </div>
+  <div id="commande-container" style="padding: 20px; margin-left: 240px;"></div>
+
+  <script>
+    const statutCouleur = {
+      "envoyé": "#2c2c2e",
+      "accepté": "#2c2c2e",
+      "prêt": "#2c2c2e",
+      "terminée": "#2c2c2e"
+    };
+
+    supabase
+      .from('commandes')
+      .select('*')
+      .order('heure_commande', { ascending: true })
+      .then(({ data: commandes, error }) => {
+        if (error) {
+          console.error("Erreur de chargement commandes:", error);
+          return;
+        }
+
+        const container = document.getElementById("commande-container");
+        if (!commandes || !commandes.length) {
+          container.innerHTML = "<p>Aucune commande enregistrée.</p>";
+          return;
+        }
+
+        afficherClientsEtCommandes(commandes);
+        afficherCommandesWidget(commandes);
+
+        commandes.forEach(cmd => {
+          const bloc = document.createElement("div");
+          bloc.classList.add("commande-bloc");
+
+          const heureCommande = new Date(cmd.heure_commande);
+          const maintenant = new Date();
+          const delai = (maintenant - heureCommande) / 60000;
+
+          let statutActuel = cmd.statut;
+          if (cmd.statut === "accepté" && delai >= 15) {
+            statutActuel = "prêt";
+          }
+
+          bloc.dataset.id = cmd.id;
+          bloc.style.background = statutCouleur[statutActuel];
+
+          const produits = cmd.produits.map(p => `${p.nom} x${p.quantite}`).join(", ");
+
+          bloc.innerHTML = `
+            <div class="commande-header">Commande ID : ${cmd.id}</div>
+            <div class="commande-info">
+              <fieldset class="widget-client widget-box">
+                <legend>👤 Client</legend>
+                <p><strong>Nom :</strong> ${cmd.nom || "-"}</p>
+                <p><strong>Téléphone :</strong> ${cmd.client_tel}</p>
+              </fieldset>
+
+              <fieldset class="widget-commande widget-box">
+                <legend>🛒 Commande</legend>
+                <p><strong>Produits :</strong> ${produits}</p>
+              </fieldset>
+
+              <fieldset class="widget-statut widget-box">
+                <legend>📦 Statut</legend>
+                <div style="display: flex; gap: 8px; flex-wrap:wrap;">
+                  <button class="statut-btn" data-statut="envoyé" type="button">🟡 Envoyé</button>
+                  <button class="statut-btn" data-statut="accepté" type="button">🟠 Accepté</button>
+                  <button class="statut-btn" data-statut="prêt" type="button">✅ Prêt</button>
+                  <button class="statut-btn" data-statut="terminée" type="button">🔴 Terminée</button>
+                </div>
+              </fieldset>
+
+              <fieldset class="widget-message widget-box">
+                <legend>📝 Message Client</legend>
+                <textarea rows="2">${cmd.message || ""}</textarea>
+              </fieldset>
+
+              <button class="enregistrer-btn" type="button">💾 Enregistrer</button>
+            </div>
+          `;
+
+          const boutons = bloc.querySelectorAll("button.statut-btn");
+          boutons.forEach(btn => {
+            if (btn.dataset.statut === statutActuel) {
+              btn.classList.add("active");
+            }
+          });
+
+          container.appendChild(bloc);
+        });
+      });
+
+    document.addEventListener("click", e => {
+      if (e.target.matches("button[data-statut]")) {
+        const bloc = e.target.closest("div[data-id]");
+        if (!bloc) return;
+        const id = bloc.dataset.id;
+        const newStatut = e.target.dataset.statut;
+
+        // Changer couleur de fond
+        bloc.style.background = statutCouleur[newStatut];
+
+        // Mettre à jour l'apparence des boutons
+        const boutons = bloc.querySelectorAll("button.statut-btn");
+        boutons.forEach(btn => {
+          btn.classList.toggle("active", btn.dataset.statut === newStatut);
+        });
+
+        // (À compléter : envoyer vers backend ou modifier JSON)
+        console.log(`Commande ${id} mise à jour avec statut : ${newStatut}`);
+      }
+    });
+
+    function toggleWidgetMenu() {
+      const menu = document.getElementById("widget-menu");
+      menu.style.display = menu.style.display === "none" ? "block" : "none";
+    }
+
+    function toggleSection(widgetClass) {
+      const blocs = document.querySelectorAll("." + widgetClass);
+      blocs.forEach(el => {
+        el.style.display = el.style.display === "none" ? "block" : "none";
+      });
+    }
+
+    function afficherClientsEtCommandes(commandes) {
+      const clientMap = {};
+      commandes.forEach(cmd => {
+        const tel = cmd.client_tel;
+        if (!clientMap[tel] || new Date(cmd.heure_commande) > new Date(clientMap[tel].heure_commande)) {
+          clientMap[tel] = {
+            nom: cmd.nom,
+            tel: tel,
+            heure_commande: cmd.heure_commande
+          };
+        }
+      });
+
+      const clientListe = document.createElement("div");
+      clientListe.id = "client-liste";
+      clientListe.style.maxWidth = "300px";
+      clientListe.style.margin = "20px";
+      clientListe.style.padding = "15px";
+      clientListe.style.background = "#2c2c2e";
+      clientListe.style.border = "1px solid #444";
+      clientListe.style.borderRadius = "12px";
+      clientListe.style.boxShadow = "0 2px 10px rgba(0,0,0,0.8)";
+      clientListe.style.color = "#ddd";
+      clientListe.innerHTML = "<h2>📇 Liste des Clients</h2>";
+
+      Object.values(clientMap).forEach(client => {
+        const div = document.createElement("div");
+        div.style.padding = "10px";
+        div.style.marginBottom = "5px";
+        div.style.border = "1px solid #444";
+        div.style.borderRadius = "8px";
+        div.style.display = "flex";
+        div.style.flexDirection = "column";
+        div.style.gap = "4px";
+        div.style.color = "#eee";
+        div.style.background = "#3a3a3c";
+        div.innerHTML = `
+          <strong>${client.nom}</strong>
+          <span>📞 ${client.tel}</span>
+          <small>Dernière commande : ${new Date(client.heure_commande).toLocaleString()}</small>
+          <button type="button" style="align-self:flex-start; padding: 5px 10px; border:none; border-radius:6px; background:#0a84ff; color:white; cursor:pointer; font-size:0.9em;">Voir détails</button>
+        `;
+        const btn = div.querySelector("button");
+        btn.onclick = () => {
+          const commandesClient = Array.from(document.querySelectorAll(".commande-bloc")).filter(bloc => {
+            return bloc.querySelector(".widget-client p strong")?.textContent === client.nom && bloc.querySelector(".widget-client p:nth-child(2)")?.textContent.includes(client.tel);
+          });
+          if (commandesClient.length > 0) {
+            commandesClient[0].scrollIntoView({ behavior: "smooth", block: "center" });
+            commandesClient[0].style.outline = "3px solid #0a84ff";
+            setTimeout(() => { commandesClient[0].style.outline = "none"; }, 1500);
+          }
+        };
+        clientListe.appendChild(div);
+      });
+
+      document.body.appendChild(clientListe);
+    }
+
+    function afficherCommandesWidget(commandes) {
+      const conteneur = document.createElement("div");
+      conteneur.id = "commandes-widget";
+      conteneur.style.position = "fixed";
+      conteneur.style.right = "20px";
+      conteneur.style.top = "80px";
+      conteneur.style.width = "260px";
+      conteneur.style.maxHeight = "70vh";
+      conteneur.style.overflowY = "auto";
+      conteneur.style.background = "#2c2c2e";
+      conteneur.style.border = "1px solid #444";
+      conteneur.style.borderRadius = "12px";
+      conteneur.style.padding = "12px";
+      conteneur.style.boxShadow = "0 2px 10px rgba(0,0,0,0.8)";
+      conteneur.style.color = "#ddd";
+      conteneur.innerHTML = "<h3>⏳ Commandes en cours</h3>";
+
+      commandes
+        .filter(c => c.statut !== "terminée")
+        .sort((a, b) => new Date(a.heure_commande) - new Date(b.heure_commande))
+        .forEach(cmd => {
+          const ligne = document.createElement("div");
+          ligne.textContent = `🕒 ${cmd.nom} (${cmd.client_tel})`;
+          ligne.style.padding = "6px";
+          ligne.style.marginBottom = "6px";
+          ligne.style.borderRadius = "6px";
+          ligne.style.cursor = "pointer";
+          ligne.style.transition = "0.3s ease";
+          ligne.style.background = "#3a3a3c";
+          ligne.style.color = "#ddd";
+
+          ligne.onmouseover = () => ligne.style.background = "#0a84ff";
+          ligne.onmouseout = () => ligne.style.background = "#3a3a3c";
+
+          ligne.onclick = () => {
+            const cible = document.querySelector(`[data-id="${cmd.id}"]`);
+            if (cible) {
+              cible.scrollIntoView({ behavior: "smooth", block: "center" });
+              cible.style.outline = "3px solid #0a84ff";
+              setTimeout(() => { cible.style.outline = "none"; }, 1500);
+            }
+          };
+
+          conteneur.appendChild(ligne);
+        });
+
+      document.body.appendChild(conteneur);
+    }
+  </script>
+</body>
+</html>

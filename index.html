@@ -8,36 +8,26 @@
   <script defer src="script.js"></script>
   <script defer src="panier.js"></script>
 </head>
-<body>
-  <header class="site-header">
-    <a href="index.html" class="logo-link">
-      <img src="assets/img/logo.png" alt="MTlé Sazón Logo" class="logo" />
-    </a>
-    <nav class="nav-desktop">
-      <a href="index.html">ACCUEIL</a>
-      <a href="menu.html">MENU</a>
-      <a href="https://www.instagram.com/toncompteinsta" target="_blank">INSTAGRAM</a>
-    </nav>
-    <div class="cart-icon" onclick="window.location.href='checkout.html'">
-      🛒 <span id="cart-count">0</span>
-    </div>
-    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
-    <nav class="nav-mobile" id="mobileMenu">
-      <a href="index.html">ACCUEIL</a>
-      <a href="menu.html">MENU</a>
-      <a href="https://www.instagram.com/toncompteinsta" target="_blank">INSTAGRAM</a>
-      <a href="checkout.html">PANIER 🛒 <span id="cart-count-mobile">0</span></a>
-    </nav>
-  </header>
+<body id="index-page">
   <section class="promo-banner">
     <img src="assets/img/promo-banner.jpg" alt="Promo MTlé Sazón" />
-  </section>
-
-  <main class="home-content" style="text-align:center; padding:60px 20px;">
-    <div class="cta-buttons">
-      <a href="menu.html"><button style="background-color:#d94f30; color:white;">COMMANDER MAINTENANT</button></a>
-      <a href="https://www.instagram.com/toncompteinsta" target="_blank"><button style="background-color:#444; color:white;">JE VEUX TE SUIVRE SUR INSTAGRAM</button></a>
+    <div class="cta-overlay" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); display: flex; align-items: center; gap: 15px;">
+      <a href="menu.html">
+        <button class="btn-primary">COMMANDER MAINTENANT</button>
+      </a>
+      <a href="https://www.instagram.com/toncompteinsta" target="_blank">
+        <img src="assets/img/insta.gif" alt="Instagram" class="instagram-btn" style="width: 44px; height: 44px; object-fit: contain;" />
+      </a>
     </div>
-  </main>
+  </section>
 </body>
+  <footer style="background-color: #f3f3f3; padding: 20px; text-align: center; font-size: 0.9em; color: #555;">
+    <div style="margin-bottom: 10px;">
+      &copy; 2024 <strong>MTlé Sazón</strong> – Tous droits réservés<br />
+      Site conçu pour un usage local et livraison rapide.
+    </div>
+    <a href="admin.html" style="display: inline-block; margin-top: 10px; padding: 10px 16px; background-color: #d94f30; color: white; text-decoration: none; border-radius: 6px; font-weight: bold;">
+      🔐 Accès Admin
+    </a>
+  </footer>
 </html>
