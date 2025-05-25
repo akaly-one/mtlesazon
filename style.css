@@ -95,86 +95,6 @@ section h2 {
 /* ============================
    Products (Cards, Grid, Info)
 ============================ */
-.product-grid {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  padding: 10px 0;
-}
-
-/* Image produit à gauche avec nom et prix à droite (style Uber Eats) */
-.product-card {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 15px;
-  justify-content: space-between;
-  border: 1px solid #eee;
-  border-radius: 10px;
-  padding: 15px;
-  background-color: #fff;
-  box-shadow: 0 0 5px rgba(0,0,0,0.05);
-}
-
-.product-card img {
-  height: 70px;
-  width: 70px;
-  object-fit: cover;
-  border-radius: 10px;
-  margin-left: 0; /* reset margin-left from .product-img */
-}
-
-.product-info {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  flex: 1;
-  justify-content: center;
-}
-
-.product-info h3 {
-  margin: 0;
-  font-size: 16px;
-  font-weight: bold;
-  color: #333;
-}
-
-.product-info p {
-  margin: 4px 0;
-  color: #d94f30;
-  font-weight: bold;
-}
-
-.product-img {
-  height: 80px;
-  width: 80px;
-  object-fit: cover;
-  border-radius: 10px;
-  margin-left: 10px;
-}
-
-/* Quantity Buttons */
-.qty-buttons {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 10px;
-}
-
-.qty-buttons button {
-  background-color: #d94f30;
-  color: white;
-  border: none;
-  padding: 5px 12px;
-  font-size: 18px;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.qty-buttons span {
-  font-size: 16px;
-  margin: 0 10px;
-}
 
 /* ============================
    Checkout
@@ -463,6 +383,21 @@ form input, form button {
     font-size: 12px;
     min-width: 16px;
   }
+
+  .cart-summary {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    max-width: none;
+    background-color: #fff7ef;
+    border-top: 1px solid #ddd;
+    padding: 12px 20px;
+    box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
+    display: none;
+    z-index: 1000;
+  }
 }
 
 /* ============================
@@ -503,4 +438,206 @@ form input, form button {
   margin-top: 10px;
   font-weight: bold;
   text-align: center;
+}
+/* ============================
+   Pages Spécifiques – Checkout (Complément sans redondance)
+============================ */
+.checkout-section h1 {
+  font-size: 22px;
+  margin-bottom: 20px;
+  text-align: center;
+  color: #d94f30;
+}
+
+.ligne-panier {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+#total-panier {
+  text-align: center;
+  font-weight: bold;
+  font-size: 18px;
+  margin: 20px 0;
+  color: #333;
+}
+
+#confirmation {
+  margin-top: 30px;
+  text-align: center;
+  font-size: 16px;
+  color: #444;
+}
+
+/* ============================
+   Pages Spécifiques – Suivi
+============================ */
+.suivi-section {
+  padding: 30px 20px;
+  background-color: #fefefe;
+}
+
+.suivi-section h2 {
+  color: #d94f30;
+  text-align: center;
+}
+
+.suivi-status {
+  font-weight: bold;
+  font-size: 18px;
+  margin-top: 20px;
+  text-align: center;
+}
+
+.suivi-message {
+  text-align: center;
+  font-style: italic;
+  margin-top: 10px;
+  color: #666;
+}
+
+/* ============================
+   Pages Spécifiques – Admin
+============================ */
+.admin-dashboard {
+  padding: 30px;
+  background-color: #1e1e1e;
+  color: white;
+  min-height: 100vh;
+}
+
+.admin-dashboard h1 {
+  color: #d94f30;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.widget {
+  background-color: #2b2b2b;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.widget h2 {
+  margin-top: 0;
+  font-size: 18px;
+  color: #fff;
+}
+
+.widget .etat {
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-weight: bold;
+  margin-right: 10px;
+  display: inline-block;
+}
+
+.etat-envoye {
+  background-color: #ffd700;
+  color: #222;
+}
+
+.etat-accepte {
+  background-color: orange;
+  color: white;
+}
+
+.etat-pret {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.menu-produits {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  padding: 20px;
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.menu-produits .categorie-section {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.menu-produits .categorie-titre {
+  font-size: 22px;
+  text-align: center;
+  text-transform: uppercase;
+  color: #d94f30;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 6px;
+  margin-bottom: 10px;
+}
+
+.menu-produits .produit-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  padding: 12px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+}
+
+.menu-produits .produit-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.menu-produits .produit-nom {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.menu-produits .produit-description {
+  font-size: 13px;
+  color: #555;
+}
+
+.menu-produits .produit-prix {
+  font-size: 14px;
+  font-weight: bold;
+  color: #e44;
+}
+
+.menu-produits .produit-image img {
+  width: 64px;
+  height: 64px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.menu-produits .produit-actions {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 6px;
+}
+
+.menu-produits .produit-actions button {
+  background-color: #d94f30;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.menu-produits .produit-actions span {
+  font-size: 14px;
+  min-width: 20px;
+  text-align: center;
+  font-weight: bold;
+  color: #333;
 }

@@ -4,90 +4,116 @@
       "categorie": "Empanadas",
       "nom": "Empanada Colombienne",
       "prix": 3.50,
-      "image": "assets/img/emp-poulet.jpeg"
+      "image": "assets/img/emp-poulet.jpeg",
+      "description": "",
+      "actif": true
     },
     {
       "id": "EMP02",
       "categorie": "Empanadas",
       "nom": "Empanada Équatorienne",
       "prix": 3.50,
-      "image": "assets/img/emp-poulet.jpeg"
+      "image": "assets/img/emp-poulet.jpeg",
+      "description": "",
+      "actif": true
     },
     {
       "id": "EMP03",
       "categorie": "Empanadas",
       "nom": "Empanada Fromage",
       "prix": 3.20,
-      "image": "assets/img/emp-poulet.jpeg"
+      "image": "assets/img/emp-poulet.jpeg",
+      "description": "",
+      "actif": true
     },
     {
       "id": "EMP04",
       "categorie": "Empanadas",
       "nom": "Empanada Poulet",
       "prix": 3.80,
-      "image": "assets/img/emp-poulet.jpeg"
+      "image": "assets/img/emp-poulet.jpeg",
+      "description": "",
+      "actif": true
     },
     {
       "id": "EMP05",
       "categorie": "Empanadas",
       "nom": "Empanada Végétarienne",
       "prix": 3.60,
-      "image": "assets/img/emp-poulet.jpeg"
+      "image": "assets/img/emp-poulet.jpeg",
+      "description": "",
+      "actif": true
     },
     {
       "id": "SAU01",
       "categorie": "Suppléments",
       "nom": "Sauce Piment Rouge",
       "prix": 0.50,
-      "image": "assets/img/emp-poulet.jpeg"
+      "image": "assets/img/emp-poulet.jpeg",
+      "description": "",
+      "actif": true
     },
     {
       "id": "SAU02",
       "categorie": "Suppléments",
       "nom": "Sauce Ail Doux",
       "prix": 0.50,
-      "image": "assets/img/emp-poulet.jpeg"
+      "image": "assets/img/emp-poulet.jpeg",
+      "description": "",
+      "actif": true
     },
     {
       "id": "SAU03",
       "categorie": "Suppléments",
       "nom": "Sauce Verde",
       "prix": 0.50,
-      "image": "assets/img/emp-poulet.jpeg"
+      "image": "assets/img/emp-poulet.jpeg",
+      "description": "",
+      "actif": true
     },
     {
       "id": "BOI01",
       "categorie": "Boissons",
       "nom": "Coca-Cola",
       "prix": 2.00,
-      "image": "https://images.unsplash.com/photo-1580910051071-c10f57b1b5e6"
+      "image": "https://images.unsplash.com/photo-1580910051071-c10f57b1b5e6",
+      "description": "",
+      "actif": true
     },
     {
       "id": "BOI02",
       "categorie": "Boissons",
       "nom": "Jugo de Maracuyá",
       "prix": 2.50,
-      "image": "https://images.unsplash.com/photo-1591284332836-bbf8b6cdb7b9"
+      "image": "https://images.unsplash.com/photo-1591284332836-bbf8b6cdb7b9",
+      "description": "",
+      "actif": true
     },
     {
       "id": "BOI03",
       "categorie": "Boissons",
       "nom": "Agua sin gas",
       "prix": 1.80,
-      "image": "https://images.unsplash.com/photo-1571802701612-85abefcfb3f8"
+      "image": "https://images.unsplash.com/photo-1571802701612-85abefcfb3f8",
+      "description": "",
+      "actif": true
     },
     {
       "id": "BOI04",
       "categorie": "Boissons",
       "nom": "Inca Kola",
       "prix": 2.30,
-      "image": "https://images.unsplash.com/photo-1620912882299-df5dcac6c7f5"
+      "image": "https://images.unsplash.com/photo-1620912882299-df5dcac6c7f5",
+      "description": "",
+      "actif": true
     },
     {
       "id": "BOI05",
       "categorie": "Boissons",
       "nom": "Horchata",
       "prix": 2.20,
-      "image": "https://images.unsplash.com/photo-1586201375771-83865001e17a"
+      "image": "https://images.unsplash.com/photo-1586201375771-83865001e17a",
+      "description": "",
+      "actif": true
     }
   ]

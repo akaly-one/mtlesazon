@@ -10,34 +10,39 @@
       justify-content: center;
       align-items: center;
       height: 100vh;
-      background: #f2f2f7;
+      background: #121212;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen;
       margin: 0;
     }
 
     .login-box {
-      background: white;
+      background: #1e1e1e;
       padding: 30px;
       border-radius: 14px;
       box-shadow: 0 6px 20px rgba(0,0,0,0.1);
-      width: 320px;
+      width: 300px;
       text-align: center;
     }
 
     .login-box h2 {
-      margin-bottom: 20px;
+      margin-bottom: 24px;
       font-weight: 600;
-      color: #333;
+      color: #ffffff;
     }
 
     input {
       width: 100%;
       padding: 12px;
-      margin: 10px 0;
+      padding-left: 12px;
+      padding-right: 12px;
+      margin: 12px 0;
       border-radius: 10px;
-      border: 1px solid #ccc;
+      border: 1px solid #444;
       font-size: 1em;
       font-family: inherit;
+      color: #fff;
+      background: #2a2a2a;
+      box-sizing: border-box;
     }
 
     button {
@@ -59,7 +64,7 @@
     }
 
     #erreur {
-      color: red;
+      color: #ff6b6b;
       font-size: 0.9em;
       margin-top: 10px;
     }
@@ -67,9 +72,9 @@
 </head>
 <body>
   <div class="login-box">
-    <h2>Admin Login</h2>
-    <input type="text" id="username" placeholder="Nom d'utilisateur" />
-    <input type="password" id="password" placeholder="Mot de passe" />
+    <h2>🔒</h2>
+    <input type="text" id="username" placeholder="👤" />
+    <input type="password" id="password" placeholder="****" />
     <button onclick="verifierLogin()">Se connecter</button>
     <p id="erreur" style="color:red; text-align:center;"></p>
   </div>

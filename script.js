@@ -45,17 +45,19 @@ async function chargerProduits() {
         const carte = document.createElement("div");
         carte.className = "product-card";
 
+        const imageSrc = prod.image || "assets/img/emp-poulet.jpeg";
         carte.innerHTML = `
-          <img src="${prod.image}" alt="${prod.nom}">
+          <img src="${imageSrc}" alt="${prod.nom}">
           <div class="product-info">
             <h3>${prod.nom}</h3>
+            <p>${prod.description || ""}</p>
             <p>${prod.prix.toFixed(2)}€</p>
           </div>
           <div class="product-actions">
             <div class="qty-controls">
-              <button onclick="retirerDuPanier('${prod.id}')">−</button>
+              <button class="moins-btn" data-id="${prod.id}">−</button>
               <span id="qte-${prod.id}">0</span>
-              <button onclick="ajouterAuPanier('${prod.id}', '${prod.nom}', ${prod.prix})">+</button>
+              <button class="plus-btn" data-id="${prod.id}" data-nom="${prod.nom}" data-prix="${prod.prix}">+</button>
             </div>
           </div>
         `;
@@ -73,6 +75,19 @@ async function chargerProduits() {
 }
 chargerProduits();
 afficherPanier();
+
+document.addEventListener("click", function(e) {
+  if (e.target.classList.contains("plus-btn")) {
+    const id = e.target.getAttribute("data-id");
+    const nom = e.target.getAttribute("data-nom");
+    const prix = parseFloat(e.target.getAttribute("data-prix"));
+    ajouterAuPanier(id, nom, prix);
+  }
+  if (e.target.classList.contains("moins-btn")) {
+    const id = e.target.getAttribute("data-id");
+    retirerDuPanier(id);
+  }
+});
 
 // === FORMULAIRE CHECKOUT > CONFIRMATION (checkout.html) ===
 function afficherConfirmation() {
@@ -176,3 +191,30 @@ function afficherPanier() {
 
   totalEl.textContent = `Total : ${total.toFixed(2)}€`;
 }
+
+function activerPanierMobile() {
+  const panierToggle = document.querySelector(".cart-icon");
+  const resumeCommande = document.querySelector(".cart-summary");
+
+  if (!panierToggle || !resumeCommande) return;
+
+  // Cacher par défaut en mobile
+  function verifierAffichage() {
+    if (window.innerWidth <= 768) {
+      resumeCommande.style.display = "none";
+    } else {
+      resumeCommande.style.display = "block";
+    }
+  }
+
+  verifierAffichage(); // au chargement
+  window.addEventListener("resize", verifierAffichage);
+
+  panierToggle.addEventListener("click", () => {
+    if (window.innerWidth <= 768) {
+      resumeCommande.style.display = resumeCommande.style.display === "none" ? "block" : "none";
+    }
+  });
+}
+
+activerPanierMobile();

@@ -39,31 +39,7 @@
 
   <main class="suivi-section" style="padding: 40px 20px; text-align: center; background: #fefefe; color: #222;">
     <h1>Suivi de ta commande</h1>
-    <style>
-      #suivi-contenu {
-        background: white;
-        max-width: 500px;
-        margin: 0 auto;
-        padding: 20px;
-        border-radius: 12px;
-        box-shadow: 0 0 12px rgba(0,0,0,0.08);
-        font-size: 1rem;
-        color: #222;
-        text-align: left;
-      }
-      #suivi-contenu p {
-        margin-bottom: 10px;
-      }
-      #suivi-contenu ul {
-        margin-top: 10px;
-      }
-      #suivi-contenu a {
-        text-decoration: none;
-        display: inline-block;
-        margin-top: 4px;
-      }
-    </style>
-    <div id="suivi-contenu"></div>
+    <div id="suivi-contenu" class="suivi-container"></div>
   </main>
 <script>
   async function afficherCommande() {
@@ -88,42 +64,46 @@
     }
 
     const statutLabel = {
-      "envoyé": "🟡 Envoyée",
-      "accepté": "🟠 Acceptée",
+      "préouverture": "⏳ En attente d'ouverture",
+      "attente": "🟡 En attente",
+      "confirmée": "🟠 Confirmée",
       "prêt": "✅ Prête",
-      "terminée": "🔴 Terminée"
+      "terminée": "🔴 Terminée",
+      "archivée": "⚫ Archivée"
     };
 
     const dateCmd = new Date(commande.heure_commande);
     const now = new Date();
-    const delaiMs = 15 * 60 * 1000 - (now - dateCmd);
-    const tempsRestant = Math.max(0, delaiMs);
-    const minutes = Math.floor(tempsRestant / 60000);
-    const seconds = Math.floor((tempsRestant % 60000) / 1000);
+    const diffMinutes = (now - dateCmd) / 60000;
+    const tempsRestant = Math.max(0, 45 - diffMinutes);
+    const minutes = Math.floor(tempsRestant);
+    const seconds = Math.floor((45 * 60 - diffMinutes * 60) % 60);
 
     const produits = commande.produits.map(p => `• ${p.nom} x${p.quantite}`).join("<br>");
 
     const baseURL = window.location.origin + window.location.pathname;
     const suiviURL = `${baseURL}?id=${commandeID}`;
 
-    const estExpiree = commande.statut === "terminée" || tempsRestant <= 0;
+    const estExpiree = commande.statut === "archivée" || commande.statut === "terminée" || diffMinutes >= 45;
 
     contenu.innerHTML = `
-      <p><strong>Commande :</strong> ${commandeID}</p>
-      <p><strong>Statut :</strong> ${statutLabel[commande.statut]}</p>
-      <p><strong>Produits :</strong><br>${produits}</p>
-      <p><strong>Lieu :</strong> ${commande.message ? commande.message : "À retirer sur place"}</p>
-      <p><strong>Estimation :</strong> ${estExpiree ? "Commande expirée ou livrée." : `${minutes} min ${seconds}s restantes`}</p>
-      <p style="margin-top: 30px;">Tu peux partager ce lien de suivi :</p>
-      <ul style="list-style: none; padding: 0;">
-        <li><a href="https://wa.me/?text=Voici ton lien de suivi MTlé Sazón : ${encodeURIComponent(suiviURL)}" target="_blank" style="color: #25D366; font-weight: bold;">📱 WhatsApp</a></li>
-        <li><a href="mailto:?subject=Suivi de commande MTlé Sazón&body=Voici ton lien de suivi : ${encodeURIComponent(suiviURL)}" style="color: #0072c6; font-weight: bold;">✉️ E-mail</a></li>
-        <li><a href="${suiviURL}" style="color: #555; font-weight: bold;">🔗 Lien direct</a></li>
-      </ul>
+      <div class="suivi-card statut-${commande.statut.toLowerCase()}">
+        <p><strong>Commande :</strong> ${commandeID}</p>
+        <p><strong>Statut :</strong> ${statutLabel[commande.statut]}</p>
+        <p><strong>Produits :</strong><br>${produits}</p>
+        <p><strong>Lieu :</strong> ${commande.message ? commande.message : "À retirer sur place"}</p>
+        <p><strong>Estimation :</strong> ${estExpiree ? "Commande expirée ou livrée." : `${minutes} min ${seconds}s restantes`}</p>
+        <p style="margin-top: 30px;">Tu peux partager ce lien de suivi :</p>
+        <ul style="list-style: none; padding: 0;">
+          <li><a href="https://wa.me/?text=Voici ton lien de suivi MTlé Sazón : ${encodeURIComponent(suiviURL)}" target="_blank" style="color: #25D366; font-weight: bold;">📱 WhatsApp</a></li>
+          <li><a href="mailto:?subject=Suivi de commande MTlé Sazón&body=Voici ton lien de suivi : ${encodeURIComponent(suiviURL)}" style="color: #0072c6; font-weight: bold;">✉️ E-mail</a></li>
+          <li><a href="${suiviURL}" style="color: #555; font-weight: bold;">🔗 Lien direct</a></li>
+        </ul>
+      </div>
     `;
 
     if (!estExpiree) {
-      setTimeout(afficherCommande, 1000); // auto-refresh
+      setTimeout(() => afficherCommande(), 1000);
     }
   }
 

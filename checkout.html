@@ -34,45 +34,45 @@
       <a href="index.html">ACCUEIL</a>
       <a href="menu.html">MENU</a>
       <a href="https://www.instagram.com/toncompteinsta" target="_blank">INSTAGRAM</a>
-      <a href="checkout.html">PANIER 🛒 <span id="cart-count-mobile">0</span></a>
+      <a href="checkout.html" class="cart-link-mobile">PANIER 🛒 <span id="cart-count-mobile">0</span></a>
     </nav>
   </header>
 
-  <main class="checkout-section" style="padding: 40px 20px; background: #fefefe;">
-    <h1 style="text-align: center;">Valider ma commande</h1>
-    <div id="recap-panier" style="max-width: 500px; margin: auto; margin-bottom: 30px; background: #f9f9f9; padding: 15px; border-radius: 10px;">
-      <h2 style="text-align: center;">Récapitulatif</h2>
-      <ul id="liste-panier" style="list-style:none; padding: 0;">
+  <main class="checkout-section">
+    <h1 class="checkout-title">Valider ma commande</h1>
+    <div id="recap-panier" class="recap-panier">
+      <h2 class="recap-title">Récapitulatif</h2>
+      <ul id="liste-panier" class="liste-panier">
         <!-- Exemple d'un produit inséré dynamiquement -->
         <!-- Ce bloc sera cloné via JS -->
-        <li class="ligne-panier" style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
-          <img src="assets/img/emp-poulet.jpeg" alt="Empanada" style="width: 60px; height: 60px; object-fit: cover; border-radius: 8px;" />
-          <div>
+        <li class="ligne-panier">
+          <img src="assets/img/emp-poulet.jpeg" alt="Empanada" class="ligne-panier-img" />
+          <div class="ligne-panier-desc">
             <strong>Nom du produit</strong><br />
             <small>Quantité : 2</small>
           </div>
         </li>
         <!-- Fin exemple -->
       </ul>
-      <p id="total-panier" style="text-align:center; font-weight: bold; margin-top: 10px;"></p>
-      <a href="menu.html" style="display:block; text-align:center; margin-top:10px; color:#d94f30;">Modifier ma commande</a>
+      <p id="total-panier" class="total-panier"></p>
+      <a href="menu.html" class="modifier-commande-link">Modifier ma commande</a>
     </div>
-    <form id="form-checkout" onsubmit="return afficherConfirmation(event);" style="max-width: 500px; margin: auto;">
-      <input type="text" placeholder="Nom complet" required style="width:100%;margin-bottom:10px;padding:10px;" />
-      <input type="tel" placeholder="Téléphone" required style="width:100%;margin-bottom:10px;padding:10px;" />
-      <input type="email" placeholder="Email (optionnel)" style="width:100%;margin-bottom:10px;padding:10px;" />
-      <input type="text" placeholder="Adresse (si livraison)" style="width:100%;margin-bottom:20px;padding:10px;" />
-      <button type="submit" style="width:100%;background-color:#d94f30;color:white;padding:15px;border:none;border-radius:5px;font-weight:bold;font-size:1.1em;">Confirmer la commande</button>
+    <form id="form-checkout" onsubmit="return afficherConfirmation(event);" class="form-checkout">
+      <input type="text" placeholder="Nom complet" required class="input-field" />
+      <input type="tel" placeholder="Téléphone" required class="input-field" />
+      <input type="email" placeholder="Email (optionnel)" class="input-field" />
+      <input type="text" placeholder="Adresse (si livraison)" class="input-field" />
+      <button type="submit" class="btn-submit">Confirmer la commande</button>
     </form>
 
-    <div id="confirmation" style="display: none; margin-top: 30px; text-align:center;">
+    <div id="confirmation" class="confirmation" style="display: none;">
       <h2>Merci pour ta commande !</h2>
       <p>Tu peux suivre son statut ici :</p>
-      <p><a id="suivi-link" href="#" style="color:#d94f30;font-weight:bold;">Suivre ma commande</a></p>
+      <p><a id="suivi-link" href="#" class="suivi-link">Suivre ma commande</a></p>
       <p>Tu peux aussi recevoir le lien via :</p>
-      <ul style="list-style: none; padding: 0;">
-        <li><a id="suivi-whatsapp" target="_blank" style="color: #25D366; font-weight: bold;">📱 WhatsApp</a></li>
-        <li><a id="suivi-mail" style="color: #0072c6; font-weight: bold;">✉️ E-mail</a></li>
+      <ul class="suivi-list">
+        <li><a id="suivi-whatsapp" target="_blank" class="suivi-whatsapp">📱 WhatsApp</a></li>
+        <li><a id="suivi-mail" class="suivi-mail">✉️ E-mail</a></li>
       </ul>
     </div>
   </main>
@@ -154,7 +154,8 @@
         client_tel: tel,
         produits: panier,
         message: adresse,
-        statut: "envoyé"
+        statut: "envoyé",
+        heure_commande: new Date().toISOString()
       }])
       .select()
       .single();
@@ -188,10 +189,7 @@
     const retourBtn = document.createElement("a");
     retourBtn.href = "menu.html";
     retourBtn.textContent = "← Revenir au menu";
-    retourBtn.style.display = "block";
-    retourBtn.style.marginTop = "20px";
-    retourBtn.style.color = "#d94f30";
-    retourBtn.style.fontWeight = "bold";
+    retourBtn.className = "retour-btn";
 
     confirmationDiv.appendChild(retourBtn);
 
