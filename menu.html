@@ -29,6 +29,9 @@
       <!-- JS insérera les articles ici -->
     </ul>
     <p id="cart-total">Total : 0€</p>
+    <button onclick="validerCommande()" style="margin-top: 10px; padding: 10px 16px; background-color: #d94f30; color: white; border: none; border-radius: 6px; cursor: pointer;">
+      Valider la commande
+    </button>
   </aside>
 
   <div style="max-width: 1000px; margin: 0 auto; padding: 10px;">
@@ -47,9 +50,9 @@
             <img src="assets/img/emp-poulet.jpeg" alt="Empanada Colombienne" />
           </div>
           <div class="qty-controls vertical-buttons">
-            <button onclick="addToCart('emp-col')">+</button>
-            <span>0</span>
-            <button onclick="removeFromCart('emp-col')">−</button>
+            <button onclick="modifierQuantite('emp-col', 1)">+</button>
+            <span id="quantite-emp-col">0</span>
+            <button onclick="modifierQuantite('emp-col', -1)">−</button>
           </div>
         </div>
       </div>
@@ -65,9 +68,9 @@
             <img src="assets/img/emp-poulet.jpeg" alt="Empanada Équatorienne" />
           </div>
           <div class="qty-controls vertical-buttons">
-            <button onclick="addToCart('emp-ecu')">+</button>
-            <span>0</span>
-            <button onclick="removeFromCart('emp-ecu')">−</button>
+            <button onclick="modifierQuantite('emp-ecu', 1)">+</button>
+            <span id="quantite-emp-ecu">0</span>
+            <button onclick="modifierQuantite('emp-ecu', -1)">−</button>
           </div>
         </div>
       </div>
@@ -83,9 +86,9 @@
             <img src="assets/img/emp-poulet.jpeg" alt="Empanada Poulet" />
           </div>
           <div class="qty-controls vertical-buttons">
-            <button onclick="addToCart('emp-poulet')">+</button>
-            <span>0</span>
-            <button onclick="removeFromCart('emp-poulet')">−</button>
+            <button onclick="modifierQuantite('emp-poulet', 1)">+</button>
+            <span id="quantite-emp-poulet">0</span>
+            <button onclick="modifierQuantite('emp-poulet', -1)">−</button>
           </div>
         </div>
       </div>
@@ -104,9 +107,9 @@
               <img src="assets/img/boisson-cola.jpg" alt="Boisson Cola" />
             </div>
             <div class="qty-controls vertical-buttons">
-              <button onclick="addToCart('boisson-cola')">+</button>
-              <span>0</span>
-              <button onclick="removeFromCart('boisson-cola')">−</button>
+              <button onclick="modifierQuantite('boisson-cola', 1)">+</button>
+              <span id="quantite-boisson-cola">0</span>
+              <button onclick="modifierQuantite('boisson-cola', -1)">−</button>
             </div>
           </div>
         </div>
@@ -122,9 +125,9 @@
               <img src="assets/img/jus-tropical.jpg" alt="Jus Tropical" />
             </div>
             <div class="qty-controls vertical-buttons">
-              <button onclick="addToCart('jus-tropical')">+</button>
-              <span>0</span>
-              <button onclick="removeFromCart('jus-tropical')">−</button>
+              <button onclick="modifierQuantite('jus-tropical', 1)">+</button>
+              <span id="quantite-jus-tropical">0</span>
+              <button onclick="modifierQuantite('jus-tropical', -1)">−</button>
             </div>
           </div>
         </div>
@@ -142,9 +145,9 @@
             <img src="assets/img/emp-poulet.jpeg" alt="Sauce Piquante" />
           </div>
           <div class="qty-controls vertical-buttons">
-            <button onclick="addToCart('sauce-piquante')">+</button>
-            <span>0</span>
-            <button onclick="removeFromCart('sauce-piquante')">−</button>
+            <button onclick="modifierQuantite('sauce-piquante', 1)">+</button>
+            <span id="quantite-sauce-piquante">0</span>
+            <button onclick="modifierQuantite('sauce-piquante', -1)">−</button>
           </div>
         </div>
       </div>
@@ -160,17 +163,12 @@
             <img src="assets/img/emp-poulet.jpeg" alt="Sauce Aïoli" />
           </div>
           <div class="qty-controls vertical-buttons">
-            <button onclick="addToCart('sauce-aioli')">+</button>
-            <span>0</span>
-            <button onclick="removeFromCart('sauce-aioli')">−</button>
+            <button onclick="modifierQuantite('sauce-aioli', 1)">+</button>
+            <span id="quantite-sauce-aioli">0</span>
+            <button onclick="modifierQuantite('sauce-aioli', -1)">−</button>
           </div>
         </div>
       </div>
-    </div>
-
-    <div class="cart-footer">
-      <button onclick="validerCommande()">Valider la commande</button>
-      <p id="total">Total : 0€</p>
     </div>
   </main>
   </div>
