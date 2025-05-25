@@ -26,10 +26,49 @@
     </nav>
   </header>
 
-  <main class="expire-section" style="padding: 40px 20px; text-align: center;">
+  <main class="expire-section" style="padding: 40px 20px; text-align: center; background: #fefefe;">
     <h1>Commande terminée</h1>
     <p>Ta commande a été livrée, retirée ou a expiré.</p>
-    <a href="index.html" class="cta-link" style="color:#d94f30;font-weight:bold;text-decoration:none;">Retour à l’accueil</a>
+    <a href="index.html" class="cta-link">Retour à l’accueil</a>
+  <style>
+    .expire-section {
+      max-width: 430px;
+      margin: 48px auto 0 auto;
+      background: #fff;
+      border-radius: 14px;
+      box-shadow: 0 3px 24px 0 rgba(0,0,0,0.08), 0 1.5px 6px 0 rgba(0,0,0,0.05);
+      padding: 40px 20px;
+    }
+    .expire-section h1 {
+      font-size: 2em;
+      color: #222;
+    }
+    .expire-section p {
+      font-size: 1.1em;
+      color: #444;
+      margin: 16px 0;
+    }
+    .expire-section a.cta-link {
+      display: inline-block;
+      margin-top: 16px;
+      background-color: #d94f30;
+      color: white;
+      padding: 12px 20px;
+      border-radius: 6px;
+      font-weight: bold;
+      text-decoration: none;
+      transition: background 0.18s;
+    }
+    .expire-section a.cta-link:hover {
+      background-color: #bd3d24;
+    }
+    @media (max-width: 600px) {
+      .expire-section {
+        margin: 24px 0 0 0;
+        padding: 26px 6vw;
+      }
+    }
+  </style>
   </main>
 <script>
   localStorage.removeItem("commandeID");

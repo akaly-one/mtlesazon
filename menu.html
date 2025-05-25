@@ -2,13 +2,13 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>Menu – MTlé Sazón</title>
   <link rel="stylesheet" href="style.css" />
   <script defer src="script.js"></script>
 </head>
 <body>
-  <header class="site-header" style="background-color: #fff7ef; display: flex; align-items: center; justify-content: space-between; padding: 10px 20px;">
+  <header class="site-header" style="background-color: #fff7ef; display: flex; align-items: center; justify-content: space-between; padding: 10px 20px; position: relative;">
     <a href="https://www.instagram.com/toncompteinsta" target="_blank">
       <img src="assets/img/insta.gif" alt="Instagram" class="instagram-btn" style="width: 36px; height: 36px; object-fit: cover;" />
     </a>
@@ -17,19 +17,163 @@
       <img src="assets/img/logo.png" alt="MTlé Sazón Logo" class="logo" style="height: 50px;" />
     </a>
 
-    <div class="cart-icon" onclick="window.location.href='checkout.html'" style="cursor: pointer;">
-      🛒 <span id="cart-count">0</span>
+    <div style="display: flex; flex-direction: column; align-items: flex-end; position: relative;">
+      <div class="cart-icon" onclick="window.location.href='checkout.html'" style="cursor: pointer;">
+        🛒 <span id="cart-count">0</span>
+      </div>
     </div>
   </header>
 
-  <main class="menu-section">
+  <aside class="cart-summary">
+    <h2>Votre commande</h2>
+    <ul id="cart-items">
+      <!-- JS insérera les articles ici -->
+    </ul>
+    <p id="cart-total">Total : 0€</p>
+  </aside>
+
+  <main class="menu-section" style="margin-right: 320px;">
     <h1>NOTRE MENU</h1>
-    <div id="product-list"></div>
+    <div id="product-list" class="product-list" style="display: flex; flex-direction: column; align-items: center; gap: 20px; padding: 20px;">
+      <h2 class="section-title">EMPANADAS</h2>
+      <div class="product-item">
+        <div class="product-text">
+          <h3>Empanada Colombienne</h3>
+          <p class="description">Farcie au bœuf et aux épices</p>
+          <p class="price">3.50€</p>
+        </div>
+        <div class="product-right">
+          <div class="product-image">
+            <img src="assets/img/emp-poulet.jpeg" alt="Empanada Colombienne" />
+          </div>
+          <div class="qty-controls vertical-buttons">
+            <button onclick="addToCart('emp-col')">+</button>
+            <span>0</span>
+            <button onclick="removeFromCart('emp-col')">−</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-item">
+        <div class="product-text">
+          <h3>Empanada Équatorienne</h3>
+          <p class="description">Végétarienne au fromage</p>
+          <p class="price">3.50€</p>
+        </div>
+        <div class="product-right">
+          <div class="product-image">
+            <img src="assets/img/emp-poulet.jpeg" alt="Empanada Équatorienne" />
+          </div>
+          <div class="qty-controls vertical-buttons">
+            <button onclick="addToCart('emp-ecu')">+</button>
+            <span>0</span>
+            <button onclick="removeFromCart('emp-ecu')">−</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-item">
+        <div class="product-text">
+          <h3>Empanada Poulet</h3>
+          <p class="description">Au poulet mariné et légumes</p>
+          <p class="price">3.80€</p>
+        </div>
+        <div class="product-right">
+          <div class="product-image">
+            <img src="assets/img/emp-poulet.jpeg" alt="Empanada Poulet" />
+          </div>
+          <div class="qty-controls vertical-buttons">
+            <button onclick="addToCart('emp-poulet')">+</button>
+            <span>0</span>
+            <button onclick="removeFromCart('emp-poulet')">−</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section BOISSONS -->
+      <h2 class="section-title">BOISSONS</h2>
+      
+        <div class="product-item">
+          <div class="product-text">
+            <h3>Boisson Cola</h3>
+            <p class="description">Canette 33cl</p>
+            <p class="price">1.50€</p>
+          </div>
+          <div class="product-right">
+            <div class="product-image">
+              <img src="assets/img/boisson-cola.jpg" alt="Boisson Cola" />
+            </div>
+            <div class="qty-controls vertical-buttons">
+              <button onclick="addToCart('boisson-cola')">+</button>
+              <span>0</span>
+              <button onclick="removeFromCart('boisson-cola')">−</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-item">
+          <div class="product-text">
+            <h3>Jus Tropical</h3>
+            <p class="description">Boisson exotique 25cl</p>
+            <p class="price">2.00€</p>
+          </div>
+          <div class="product-right">
+            <div class="product-image">
+              <img src="assets/img/jus-tropical.jpg" alt="Jus Tropical" />
+            </div>
+            <div class="qty-controls vertical-buttons">
+              <button onclick="addToCart('jus-tropical')">+</button>
+              <span>0</span>
+              <button onclick="removeFromCart('jus-tropical')">−</button>
+            </div>
+          </div>
+        </div>
+      
+      <!-- Section SUPPLÉMENTS -->
+      <h2 class="section-title">SUPPLÉMENTS</h2>
+      <div class="product-item">
+        <div class="product-text">
+          <h3>Sauce Piquante</h3>
+          <p class="description">Extra maison</p>
+          <p class="price">0.50€</p>
+        </div>
+        <div class="product-right">
+          <div class="product-image">
+            <img src="assets/img/emp-poulet.jpeg" alt="Sauce Piquante" />
+          </div>
+          <div class="qty-controls vertical-buttons">
+            <button onclick="addToCart('sauce-piquante')">+</button>
+            <span>0</span>
+            <button onclick="removeFromCart('sauce-piquante')">−</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-item">
+        <div class="product-text">
+          <h3>Sauce Aïoli</h3>
+          <p class="description">Crémeuse à l’ail</p>
+          <p class="price">0.50€</p>
+        </div>
+        <div class="product-right">
+          <div class="product-image">
+            <img src="assets/img/emp-poulet.jpeg" alt="Sauce Aïoli" />
+          </div>
+          <div class="qty-controls vertical-buttons">
+            <button onclick="addToCart('sauce-aioli')">+</button>
+            <span>0</span>
+            <button onclick="removeFromCart('sauce-aioli')">−</button>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <div class="cart-footer">
       <button onclick="validerCommande()">Valider la commande</button>
       <p id="total">Total : 0€</p>
     </div>
   </main>
+
+</body>
 </body>
 </html>

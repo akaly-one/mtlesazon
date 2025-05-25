@@ -1,9 +1,17 @@
+/* ============================
+   Variables & Background
+============================ */
 body {
   background-image: url("img/fondbg.png");
   background-size: 300px;
   background-repeat: repeat;
   background-attachment: fixed;
   position: relative;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: white;
+  color: #333;
 }
 
 body::before {
@@ -20,17 +28,9 @@ body > * {
   z-index: 1;
 }
 
-/* style.css – Design responsive unifié pour MTlé Sazón */
-
-body {
-  margin: 0;
-  padding: 0;
-  font-family: 'Segoe UI', sans-serif;
-  background-color: white;
-  color: #333;
-}
-
-/* HEADER */
+/* ============================
+   Header & Logo
+============================ */
 .site-header {
   display: flex;
   justify-content: space-between;
@@ -51,14 +51,30 @@ body {
   text-align: center;
 }
 
-@media (min-width: 768px) {
-  .menu-toggle,
-  .nav-mobile {
-    display: none;
-  }
+/* ============================
+   Accueil (#index-page)
+============================ */
+/* Suppression du header sur la page d’accueil uniquement */
+body#index-page .site-header {
+  display: none;
 }
 
-/* PAGE MENU */
+/* Superposition des boutons CTA sur la bannière d’accueil */
+.cta-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  z-index: 2;
+}
+
+/* ============================
+   Menu Section
+============================ */
 .menu-section {
   padding: 20px;
 }
@@ -76,6 +92,9 @@ section h2 {
   color: #d94f30;
 }
 
+/* ============================
+   Products (Cards, Grid, Info)
+============================ */
 .product-grid {
   display: flex;
   flex-direction: column;
@@ -83,9 +102,12 @@ section h2 {
   padding: 10px 0;
 }
 
+/* Image produit à gauche avec nom et prix à droite (style Uber Eats) */
 .product-card {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  align-items: center;
+  gap: 15px;
   justify-content: space-between;
   border: 1px solid #eee;
   border-radius: 10px;
@@ -94,10 +116,20 @@ section h2 {
   box-shadow: 0 0 5px rgba(0,0,0,0.05);
 }
 
+.product-card img {
+  height: 70px;
+  width: 70px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-left: 0; /* reset margin-left from .product-img */
+}
+
 .product-info {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-start;
+  flex: 1;
+  justify-content: center;
 }
 
 .product-info h3 {
@@ -121,6 +153,7 @@ section h2 {
   margin-left: 10px;
 }
 
+/* Quantity Buttons */
 .qty-buttons {
   display: flex;
   justify-content: space-between;
@@ -143,115 +176,19 @@ section h2 {
   margin: 0 10px;
 }
 
-.cart-footer {
-  margin-top: 40px;
-  text-align: center;
-}
-
-.cart-footer button {
-  background-color: #d94f30;
-  color: white;
-  font-size: 16px;
-  padding: 12px 30px;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  margin-bottom: 10px;
-}
-/* Panier visible à droite */
-.cart-icon {
-  font-size: 22px;
-  font-weight: bold;
-  color: #d94f30;
-  cursor: pointer;
-  margin-left: auto;
-}
-
-/* Harmonisation des boutons secondaires (ex. bouton Instagram) */
-.cta-buttons a button:last-child {
-  background-color: #333;
-  color: white;
-}
-
-/* Liens cliquables visibles */
-a.cta-link {
-  color: #d94f30;
-  font-weight: bold;
-  text-decoration: none;
-}
-
-/* Correction du padding global sur les formulaires (checkout) */
-form input, form button {
-  width: 100%;
-  margin-bottom: 10px;
-  padding: 12px;
-  font-size: 16px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-}
-
-/* Style pour le récapitulatif dans checkout */
+/* ============================
+   Checkout
+============================ */
 #recap-panier {
   background: #f8f8f8;
   padding: 15px;
   border-radius: 8px;
   margin-bottom: 30px;
 }
-# Image produit à gauche avec nom et prix à droite (style Uber Eats)
-.product-card {
-  flex-direction: row;
-  align-items: center;
-  gap: 15px;
-}
 
-.product-card img {
-  height: 70px;
-  width: 70px;
-  object-fit: cover;
-  border-radius: 10px;
-}
-
-.product-info {
-  flex-direction: column;
-  align-items: flex-start;
-  flex: 1;
-}
-.promo-banner {
-  width: 100%;
-  height: auto;
-  aspect-ratio: 16/9;
-  overflow: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-}
-
-.promo-banner img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-/* Suppression du header sur la page d’accueil uniquement */
-body#index-page .site-header {
-  display: none;
-}
-
-/* Superposition des boutons CTA sur la bannière d’accueil */
-.cta-overlay {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  align-items: center;
-  z-index: 2;
-}
-
+/* ============================
+   Buttons & CTA
+============================ */
 .btn-primary, .btn-secondary {
   padding: 15px 30px;
   font-size: 1rem;
@@ -270,6 +207,13 @@ body#index-page .site-header {
   background-color: #333;
   color: white;
 }
+
+/* Harmonisation des boutons secondaires (ex. bouton Instagram) */
+.cta-buttons a button:last-child {
+  background-color: #333;
+  color: white;
+}
+
 .instagram-btn {
   width: 40px;
   height: 40px;
@@ -279,4 +223,284 @@ body#index-page .site-header {
   background-position: center;
   border: none;
   cursor: pointer;
+}
+
+/* ============================
+   Panier (Cart)
+============================ */
+.cart-footer {
+  margin-top: 40px;
+  text-align: center;
+}
+
+.cart-footer button {
+  background-color: #d94f30;
+  color: white;
+  font-size: 16px;
+  padding: 12px 30px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+/* Panier visible à droite */
+.cart-icon {
+  font-size: 22px;
+  font-weight: bold;
+  color: #d94f30;
+  cursor: pointer;
+  margin-left: auto;
+}
+
+/* ============================
+   Links
+============================ */
+a.cta-link {
+  color: #d94f30;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+/* ============================
+   Forms
+============================ */
+form input, form button {
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+/* ============================
+   Promo Banner
+============================ */
+.promo-banner {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16/9;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.promo-banner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ============================
+   Responsive
+============================ */
+@media (min-width: 768px) {
+  .menu-toggle,
+  .nav-mobile {
+    display: none;
+  }
+}
+/* ============================
+   Produits – Carte Produit Universelle
+============================ */
+.product-item {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 0 8px rgba(0,0,0,0.05);
+  padding: 8px 10px;
+  width: 100%;
+  max-width: 520px;
+  flex-direction: row;
+  gap: 10px;
+  margin: 0 auto;
+}
+
+.boisson-item {
+  background-color: #eef5fa;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+.product-text {
+  flex: 1;
+  padding-right: 10px;
+}
+
+.product-text h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.product-text .description {
+  font-size: 13px;
+  color: #555;
+  margin: 4px 0;
+}
+
+.product-text .price {
+  font-size: 14px;
+  font-weight: bold;
+  color: #e44;
+}
+
+.product-image {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+}
+
+.product-image img {
+  width: 64px;
+  height: 64px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.qty-controls {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border-radius: 8px;
+  padding: 0;
+  gap: 4px;
+}
+
+.qty-controls button {
+  width: 20px;
+  height: 20px;
+  font-size: 14px;
+  background: #d94f30;
+  border: none;
+  border-radius: 50%;
+  color: white;
+  font-weight: bold;
+  line-height: 1;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.qty-controls span {
+  font-size: 14px;
+  font-weight: bold;
+  min-width: 20px;
+  text-align: center;
+  color: #222;
+}
+
+.product-right {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+}
+
+/* ============================
+   Responsive – Mobile adjustments
+============================ */
+@media screen and (max-width: 768px) {
+  .product-item {
+    flex-direction: row;
+    padding: 6px 8px;
+    max-width: 100%;
+    gap: 8px;
+  }
+
+  .product-text h3 {
+    font-size: 14px;
+  }
+
+  .product-text .description {
+    font-size: 11px;
+  }
+
+  .product-text .price {
+    font-size: 13px;
+  }
+
+  .product-image {
+    width: 48px;
+    height: 48px;
+  }
+
+  .product-image img {
+    width: 48px;
+    height: 48px;
+  }
+
+  .qty-controls {
+    right: 0;
+    top: 0;
+    gap: 4px;
+    padding: 2px 4px;
+  }
+
+  .qty-controls button {
+    width: 18px;
+    height: 18px;
+    font-size: 12px;
+  }
+
+  .qty-controls span {
+    font-size: 12px;
+    min-width: 16px;
+  }
+}
+
+/* ============================
+   Cart Summary - Fixed on right side
+============================ */
+.cart-summary {
+  position: fixed;
+  top: 90px; /* sous le header */
+  right: 20px;
+  width: 240px;
+  background-color: #fff7ef;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 15px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  z-index: 10;
+}
+
+.cart-summary h2 {
+  margin-top: 0;
+  font-size: 16px;
+  color: #d94f30;
+  text-align: center;
+}
+
+#cart-items {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#cart-items li {
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+#cart-total {
+  margin-top: 10px;
+  font-weight: bold;
+  text-align: center;
 }

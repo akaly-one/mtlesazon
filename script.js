@@ -1,3 +1,9 @@
+// === INIT SUPABASE ===
+const SUPABASE_URL = "https://pegawlulgltcxmvfirfq.supabase.co";
+const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBlZ2F3bHVsZ2x0Y3htdmZpcmZxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDgxMjE3ODgsImV4cCI6MjA2MzY5Nzc4OH0.qAh5nrKXV-D4EHPZNQLJoWZ81X8HDbiMmJ5Tx3dTklA";
+
+const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
 // === SLOGANS DYNAMIQUES (accueil) ===
 const slogans = [
   "Métele sazón, sabrosura y tentación",
@@ -40,13 +46,17 @@ async function chargerProduits() {
         carte.className = "product-card";
 
         carte.innerHTML = `
-          <img src="${prod.image}" alt="${prod.nom}" class="product-image">
-          <h3>${prod.nom}</h3>
-          <p>${prod.prix.toFixed(2)}€</p>
-          <div class="qty-buttons">
-            <button onclick="retirerDuPanier('${prod.id}')">-</button>
-            <span id="qte-${prod.id}">0</span>
-            <button onclick="ajouterAuPanier('${prod.id}', '${prod.nom}', ${prod.prix})">+</button>
+          <img src="${prod.image}" alt="${prod.nom}">
+          <div class="product-info">
+            <h3>${prod.nom}</h3>
+            <p>${prod.prix.toFixed(2)}€</p>
+          </div>
+          <div class="product-actions">
+            <div class="qty-controls">
+              <button onclick="retirerDuPanier('${prod.id}')">−</button>
+              <span id="qte-${prod.id}">0</span>
+              <button onclick="ajouterAuPanier('${prod.id}', '${prod.nom}', ${prod.prix})">+</button>
+            </div>
           </div>
         `;
         grille.appendChild(carte);
@@ -62,6 +72,7 @@ async function chargerProduits() {
   }
 }
 chargerProduits();
+afficherPanier();
 
 // === FORMULAIRE CHECKOUT > CONFIRMATION (checkout.html) ===
 function afficherConfirmation() {
@@ -93,6 +104,7 @@ function ajouterAuPanier(id, nom, prix) {
 
   // Mettre à jour le compteur
   majCompteurPanier();
+  afficherPanier();
 }
 
 // === RETRAIT DU PANIER ===
@@ -114,6 +126,7 @@ function retirerDuPanier(id) {
   }
 
   majCompteurPanier();
+  afficherPanier();
 }
 
 // === MISE À JOUR DU COMPTEUR PANIER ===
@@ -122,4 +135,44 @@ function majCompteurPanier() {
   const total = panier.reduce((acc, p) => acc + p.quantite, 0);
   const countEls = document.querySelectorAll("#cart-count, #cart-count-mobile");
   countEls.forEach(el => el.textContent = total);
+}
+
+// === ENVOI COMMANDE À SUPABASE ===
+async function saveCommandeToSupabase(nom, email, telephone, panier) {
+  const { data, error } = await supabase
+    .from("commandes")
+    .insert([{
+      nom,
+      email,
+      telephone,
+      panier: JSON.stringify(panier),
+      statut: "en attente",
+      timestamp: new Date().toISOString()
+    }]);
+
+  if (error) {
+    console.error("Erreur enregistrement commande:", error);
+  } else {
+    console.log("Commande enregistrée :", data);
+  }
+}
+
+function afficherPanier() {
+  const panier = JSON.parse(localStorage.getItem("panier")) || [];
+  const list = document.getElementById("cart-items");
+  const totalEl = document.getElementById("cart-total");
+
+  if (!list || !totalEl) return;
+
+  list.innerHTML = "";
+  let total = 0;
+
+  panier.forEach(item => {
+    const li = document.createElement("li");
+    li.textContent = `${item.nom} x${item.quantite}`;
+    list.appendChild(li);
+    total += item.quantite * item.prix;
+  });
+
+  totalEl.textContent = `Total : ${total.toFixed(2)}€`;
 }
