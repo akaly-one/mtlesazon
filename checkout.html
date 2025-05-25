@@ -16,25 +16,20 @@
   <script defer src="panier.js"></script>
 </head>
 <body>
-  <header class="site-header">
-    <a href="index.html" class="logo-link">
-      <img src="assets/img/logo.png" alt="MTlé Sazón Logo" class="logo" />
+  <header class="site-header" style="background-color: #fff7ef; display: flex; align-items: center; justify-content: space-between; padding: 10px 20px; position: sticky; top: 0; z-index: 1000;">
+    <a href="https://www.instagram.com/toncompteinsta" target="_blank" style="display: flex; align-items: center;">
+      <img src="assets/img/insta.gif" alt="Instagram" style="width: 32px; height: 32px; object-fit: cover;" />
     </a>
-    <nav class="nav-desktop">
-      <a href="index.html">ACCUEIL</a>
-      <a href="menu.html">MENU</a>
-      <a href="https://www.instagram.com/toncompteinsta" target="_blank">INSTAGRAM</a>
-    </nav>
-    <div class="cart-icon" onclick="window.location.href='checkout.html'">
-      🛒 <span id="cart-count">0</span>
+
+    <a href="index.html" style="flex-grow: 1; text-align: center;">
+      <img src="assets/img/logo.png" alt="Logo MTlé Sazón" style="height: 48px;" />
+    </a>
+
+    <div style="display: flex; align-items: center;">
+      <div onclick="window.location.href='checkout.html'" style="cursor: pointer; font-size: 18px;">
+        🛒 <span id="cart-count">0</span>
+      </div>
     </div>
-    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
-    <nav class="nav-mobile" id="mobileMenu">
-      <a href="index.html">ACCUEIL</a>
-      <a href="menu.html">MENU</a>
-      <a href="https://www.instagram.com/toncompteinsta" target="_blank">INSTAGRAM</a>
-      <a href="checkout.html" class="cart-link-mobile">PANIER 🛒 <span id="cart-count-mobile">0</span></a>
-    </nav>
   </header>
 
   <main class="checkout-section">
