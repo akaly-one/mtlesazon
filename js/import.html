@@ -1,9 +1,22 @@
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
-<script>
-  const supabase = supabase.createClient(
-    'https://pegawlulgltcxmvfirfq.supabase.co',
-    'eyJhbGciOi...dTklA'
-  );
-</script>
-<script src="js/import-produits.js"></script>
-<button onclick="importerProduitsDepuisJSON()">🚀 Importer Produits</button>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Import Produits</title>
+  <style>
+    body { font-family: sans-serif; background: #111; color: #eee; display: flex; justify-content: center; align-items: center; height: 100vh; }
+    button { background: #0a84ff; border: none; padding: 10px 20px; font-size: 16px; border-radius: 6px; cursor: pointer; }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+  <script>
+    const supabase = supabase.createClient(
+      'https://pegawlulgltcxmvfirfq.supabase.co',
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBlZ2F3bHVsZ2x0Y3htdmZpcmZxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDgxMjE3ODgsImV4cCI6MjA2MzY5Nzc4OH0.qAh5nrKXV-D4EHPZNQLJoWZ81X8HDbiMmJ5Tx3dTklA'
+    );
+  </script>
+  <script src="js/import-produits.js"></script>
+</head>
+<body>
+  <button onclick="importerProduitsDepuisJSON()">🚀 Importer Produits</button>
+</body>
+</html>

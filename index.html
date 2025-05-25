@@ -10,34 +10,45 @@
 </head>
 <body id="index-page">
   <section class="promo-banner" style="position: relative;">
-    <img src="assets/img/emp-fond.jpg" alt="Empanadas MTlé Sazón" style="width: 100%; height: auto; display: block;" />
-    <div class="cta-overlay" style="
+    <img src="assets/img/promo-banner.jpg" alt="Empanadas MTlé Sazón" style="width: 100%; height: 100dvh; object-fit: cover; display: block;" />
+
+    <!-- Bouton Instagram flottant en haut à gauche -->
+    <a href="https://www.instagram.com/toncompteinsta" target="_blank" style="
       position: absolute;
-      top: 50%;
+      top: 14px;
+      left: 14px;
+      z-index: 1000;
+    ">
+      <img src="assets/img/insta.gif" alt="Instagram" style="width: 42px; height: auto; object-fit: contain;" />
+    </a>
+
+    <!-- Bouton COMMANDER MAINTENANT flottant en bas centré -->
+    <div style="
+      position: fixed;
+      bottom: 20px;
       left: 50%;
-      transform: translate(-50%, -50%);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 20px;
-      text-align: center;
+      transform: translateX(-50%);
+      z-index: 1000;
     ">
       <a href="menu.html">
-        <button class="btn-primary" style="padding: 14px 24px; font-size: 1.1rem;">COMMANDER MAINTENANT</button>
-      </a>
-      <a href="https://www.instagram.com/toncompteinsta" target="_blank">
-        <img src="assets/img/insta.gif" alt="Instagram" class="instagram-btn" style="width: 180px; height: auto; object-fit: contain;" />
+        <button class="btn-primary" style="
+          padding: 16px 28px;
+          font-size: 1.1rem;
+          border-radius: 8px;
+          background-color: #d94f30;
+          color: white;
+          border: none;
+        ">COMMANDER MAINTENANT</button>
       </a>
     </div>
   </section>
 </body>
-  <footer style="background-color: #f3f3f3; padding: 20px; text-align: center; font-size: 0.9em; color: #555;">
+  <footer style="background-color: #f3f3f3; padding: 10px 0; text-align: center; font-size: 0.8em; color: #888;">
     <div style="margin-bottom: 10px;">
       &copy; 2024 <strong>MTlé Sazón</strong> – Tous droits réservés<br />
       Site conçu pour un usage local et livraison rapide.
     </div>
-    <a href="admin.html" style="display: inline-block; margin-top: 10px; padding: 10px 16px; background-color: #d94f30; color: white; text-decoration: none; border-radius: 6px; font-weight: bold;">
+    <a href="admin.html" style="display: inline-block; margin-top: 10px; padding: 6px 12px; background-color: #d94f30; color: white; text-decoration: none; border-radius: 4px; font-weight: 500; font-size: 0.85em;">
       🔐 Accès Admin
     </a>
   </footer>

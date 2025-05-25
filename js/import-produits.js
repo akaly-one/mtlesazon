@@ -1,3 +1,8 @@
+const supabase = supabase.createClient(
+  'https://pegawlulgltcxmvfirfq.supabase.co',
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBlZ2F3bHVsZ2x0Y3htdmZpcmZxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDgxMjE3ODgsImV4cCI6MjA2MzY5Nzc4OH0.qAh5nrKXV-D4EHPZNQLJoWZ81X8HDbiMmJ5Tx3dTklA'
+);
+
 async function importerProduitsDepuisJSON() {
     const res = await fetch("data/produits.json");
     const produits = await res.json();
